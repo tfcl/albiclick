@@ -6,23 +6,376 @@
     {"model": "orders.shipment", "pk": 1, "fields": { "name":"CTT Expresso","price":3.0}},
     {"model": "orders.shipment", "pk": 2, "fields": { "name":"Levantamento na Loja","price":0}},
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     {"model": "products.category", "pk": 1, "fields": {"name":"Computadores", "udc": 0}},
     {"model": "products.category", "pk": 2, "fields": {"name":"Mobilidade", "udc": 1}},
     {"model": "products.category", "pk": 3, "fields": {"name":"Componentes", "udc": 2}},
     {"model": "products.category", "pk": 4, "fields": {"name":"Imagem e Som", "udc": 3}},
     {"model": "products.category", "pk": 5, "fields": {"name":"Periféricos", "udc": 5}},
     {"model": "products.category", "pk": 6, "fields": {"name":"Armazenamento", "udc": 6}},
-
-    
-    {"model": "products.category", "pk": 7, "fields": {"name":"Portáteis", "parentPk":1,"depth":1,"udc": 1}},
-    {"model": "products.category", "pk": 8, "fields": {"name":"Desktops", "parentPk":1,"depth":1,"udc": 2}},
-    {"model": "products.category", "pk": 9, "fields": {"name":"Mini PCs", "parentPk":1,"depth":1,"udc": 3}},
-
-    
-    {"model": "products.category", "pk": 10, "fields": {"name":"Gaming", "parentPk":7,"depth":2,"udc": 1}},
-    {"model": "products.category", "pk": 11, "fields": {"name":"Produtividade", "parentPk":8,"depth":2,"udc": 2}},
-    {"model": "products.category", "pk": 12, "fields": {"name":"i3", "parentPk":9,"depth":2,"udc": 3}}
+    {"model": "products.category", "pk": 7, "fields": {"name":"Redes/Comunicações", "udc": 6}},
+    {"model": "products.category", "pk": 8, "fields": {"name":"Grandes Domésticos", "udc": 6}},
+    {"model": "products.category", "pk": 9, "fields": {"name":"Pequenos Domésticos", "udc": 6}},
+    {"model": "products.category", "pk": 10, "fields": {"name":"Saúde e LifeStyle", "udc": 6}},
+    {"model": "products.category", "pk": 11, "fields": {"name":"Casa e Ar Livre", "udc": 6}},
+    {"model": "products.category", "pk": 12, "fields": {"name":"Adaptadores e Cabos", "udc": 6}},
     
 
+    
+
+
+
+
+
+
+
+    {"model": "products.category", "pk": 13, "fields": {"name":"Desktops", "parentPk":1,"depth":1,"udc": 1}},
+    {"model": "products.category", "pk": 14, "fields": {"name":"Portáteis", "parentPk":1,"depth":1,"udc": 2}},
+    {"model": "products.category", "pk": 15, "fields": {"name":"Mini PCs", "parentPk":1,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 16, "fields": {"name":"Servidores", "parentPk":1,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 17, "fields": {"name":"Eletrónica / DIY", "parentPk":1,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 18, "fields": {"name":"Acessórios Notebook", "parentPk":1,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 19, "fields": {"name":"Software", "parentPk":1,"depth":1,"udc": 3}},
+
+
+
+
+
+
+    {"model": "products.category", "pk": 20, "fields": {"name":"Gaming", "parentPk":13,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 21, "fields": {"name":"WorkStation", "parentPk":13,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 22, "fields": {"name":"All-in-One", "parentPk":13,"depth":2,"udc": 3}},
+
+
+
+
+    {"model": "products.category", "pk": 23, "fields": {"name":"Windows", "parentPk":15,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 24, "fields": {"name":"macOS", "parentPk":15,"depth":2,"udc": 3}},
+ 
+
+
+
+    {"model": "products.category", "pk": 25, "fields": {"name":"Carregadores", "parentPk":18,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 26, "fields": {"name":"Mochilas", "parentPk":18,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 27, "fields": {"name":"Bolsas", "parentPk":18,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 28, "fields": {"name":"Malas", "parentPk":18,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 29, "fields": {"name":"Bases / Docks", "parentPk":18,"depth":2,"udc": 3}},
+    
+
+
+    {"model": "products.category", "pk": 30, "fields": {"name":"Sistemas Operativos", "parentPk":19,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 31, "fields": {"name":"Microsoft Office", "parentPk":19,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 32, "fields": {"name":"Segurança", "parentPk":19,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 33, "fields": {"name":"Multimédia", "parentPk":19,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 34, "fields": {"name":"Gestão", "parentPk":19,"depth":2,"udc": 3}},
+
+
+
+
+    {"model": "products.category", "pk": 35, "fields": {"name":"Smartphones e Telemóveis", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 36, "fields": {"name":"Wearables", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 37, "fields": {"name":"Mobile Audio", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 38, "fields": {"name":"Livros Eletrónicos", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 39, "fields": {"name":"Walkie Talkies", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 40, "fields": {"name":"Navegação Outdoor", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 41, "fields": {"name":"Sistemas GPS Desportivos", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 42, "fields": {"name":"Acessórios", "parentPk":2,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 43, "fields": {"name":"Tablets", "parentPk":2,"depth":1,"udc": 3}},
+
+    
+    {"model": "products.category", "pk": 44, "fields": {"name":"Smartphones Android", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 45, "fields": {"name":"Smartphones Foldable", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 46, "fields": {"name":"Smartphones iPhone", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 47, "fields": {"name":"Smartphones iPhone Recondicionados", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 48, "fields": {"name":"Telemóveis", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 49, "fields": {"name":"Capas / Bolsas", "parentPk":35,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 50, "fields": {"name":"Películas", "parentPk":35,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 51, "fields": {"name":"SmartWatch", "parentPk":36,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 52, "fields": {"name":"SmartBand", "parentPk":36,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 53, "fields": {"name":"Pulseiras e Braceletes", "parentPk":36,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 54, "fields": {"name":"Películas", "parentPk":36,"depth":2,"udc": 3}},
+  
+
+
+    {"model": "products.category", "pk": 55, "fields": {"name":"Earbuds e Earphones", "parentPk":37,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 56, "fields": {"name":"", "parentPk":37,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 57, "fields": {"name":"Colunas Portáteis", "parentPk":37,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 58, "fields": {"name":"Tablets Android", "parentPk":43,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 59, "fields": {"name":"Tablets iPad", "parentPk":43,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 60, "fields": {"name":"Películas", "parentPk":43,"depth":2,"udc": 3}},
+    
+    {"model": "products.category", "pk": 61, "fields": {"name":"eReaders", "parentPk":38,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 62, "fields": {"name":"Capas / Bolsas", "parentPk":38,"depth":2,"udc": 3}},
+
+    
+    {"model": "products.category", "pk": 63, "fields": {"name":"Sistemas GPS Desportivos", "parentPk":41,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 64, "fields": {"name":"Carregadores", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 65, "fields": {"name":"Carregadores Wireless", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 66, "fields": {"name":"Dispositivos de Rastreamento", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 67, "fields": {"name":"Carregadores de Isqueiro", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 67, "fields": {"name":"Powerbanks", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 69, "fields": {"name":"Canetas Stylus", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 70, "fields": {"name":"Bastões e Selfie Sticks", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 71, "fields": {"name":"Suportes de Carro", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 72, "fields": {"name":"Controladores Gaming", "parentPk":42,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 73, "fields": {"name":"Suportes de Mesa", "parentPk":42,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 74, "fields": {"name":"Processadores", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 75, "fields": {"name":"Motherboards", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 76, "fields": {"name":"Placas Gráficas", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 77, "fields": {"name":"Memórias RAM", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 78, "fields": {"name":"Fontes Alimentação", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 79, "fields": {"name":"Caixas de Computador", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 80, "fields": {"name":"Placas de Som", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 81, "fields": {"name":"Coolers CPU", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 82, "fields": {"name":"Drives Ópticas", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 83, "fields": {"name":"Compostos Térmicos", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 84, "fields": {"name":"Controladores", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 85, "fields": {"name":"Placas de Expansão", "parentPk":3,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 86, "fields": {"name":"Ventoinhas", "parentPk":3,"depth":1,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 87, "fields": {"name":"Processadores AMD", "parentPk":74,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 88, "fields": {"name":"Processadores Intel", "parentPk":74,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 89, "fields": {"name":"Motherboards AMD", "parentPk":75,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 90, "fields": {"name":"Motherboards Intel", "parentPk":75,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 91, "fields": {"name":"Placas Gráficas AMD", "parentPk":76,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 92, "fields": {"name":"Placas Gráficas NVIDIA", "parentPk":76,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 93, "fields": {"name":"Acessórios", "parentPk":76,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 94, "fields": {"name":"Memórias RAM DDR4", "parentPk":77,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 95, "fields": {"name":"Memórias RAM DDR3", "parentPk":77,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 96, "fields": {"name":"Memórias RAM DDR2", "parentPk":77,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 97, "fields": {"name":"Memórias RAM DDR", "parentPk":77,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 98, "fields": {"name":"Caixas Extended-ATX", "parentPk":79,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 99, "fields": {"name":"Caixas ATX", "parentPk":79,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 100, "fields": {"name":"Caixas Micro-ATX", "parentPk":79,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 101, "fields": {"name":"Caixas Mini-ITX", "parentPk":79,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 102, "fields": {"name":"Acessórios", "parentPk":79,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 103, "fields": {"name":"Placas de Som Internas", "parentPk":80,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 104, "fields": {"name":"Placas de Som Externas", "parentPk":80,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 105, "fields": {"name":"Leitores Blu-Ray", "parentPk":82,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 106, "fields": {"name":"Gravadores Blu-Ray", "parentPk":82,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 107, "fields": {"name":"Gravadores DVD", "parentPk":82,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 108, "fields": {"name":"Externas", "parentPk":82,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 109, "fields": {"name":"Pastas Térmicas", "parentPk":83,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 110, "fields": {"name":"Adesivos Térmicos", "parentPk":83,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 111, "fields": {"name":"Placas de Comunicação", "parentPk":85,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 112, "fields": {"name":"Monitores", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 113, "fields": {"name":"Televisores", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 114, "fields": {"name":"Projeção de Imagem", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 115, "fields": {"name":"Camaras", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 116, "fields": {"name":"Home Audio", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 117, "fields": {"name":"Entretenimento e Streaming", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 118, "fields": {"name":"Consolas", "parentPk":4,"depth":1,"udc": 4}},
+    {"model": "products.category", "pk": 119, "fields": {"name":"Suportes", "parentPk":4,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 120, "fields": {"name":"Equipamento DJ e Produção de Som", "parentPk":4,"depth":1,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 121, "fields": {"name":"Projetores", "parentPk":114,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 122, "fields": {"name":"Telas", "parentPk":114,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 123, "fields": {"name":"Aparelhagens", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 124, "fields": {"name":"Leitores de DVD e Blu-Ray", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 125, "fields": {"name":"Soundbars", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 126, "fields": {"name":"Colunas Portáteis", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 127, "fields": {"name":"Colunas High-Power", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 128, "fields": {"name":"Rádios e Despertadores", "parentPk":116,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 129, "fields": {"name":"Acessórios", "parentPk":116,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 130, "fields": {"name":"Microsoft Xbox", "parentPk":118,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 131, "fields": {"name":"Sony Playstation", "parentPk":118,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 132, "fields": {"name":"Nintendo", "parentPk":118,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 133, "fields": {"name":"Jogos Sony Playstation", "parentPk":118,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 134, "fields": {"name":"Jogos Nintendo", "parentPk":118,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 135, "fields": {"name":"Suportes de Monitor", "parentPk":119,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 136, "fields": {"name":"Suportes de Televisão", "parentPk":119,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 137, "fields": {"name":"Suportes de Projetor", "parentPk":119,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 138, "fields": {"name":"Controladores DJ", "parentPk":120,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 139, "fields": {"name":"Colunas DJ e Estúdio", "parentPk":120,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 140, "fields": {"name":"Design Gráfico", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 141, "fields": {"name":"Impressão e Consumíveis", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 142, "fields": {"name":"Distribuição de Energia", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 143, "fields": {"name":"PC Audio", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 144, "fields": {"name":"Ratos / Teclados", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 145, "fields": {"name":"Simulação e Controladores Gaming", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 146, "fields": {"name":"Conversação Web", "parentPk":5,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 147, "fields": {"name":"Gravação e Controlo de Produção", "parentPk":5,"depth":1,"udc": 3}},
+    
+
+
+    {"model": "products.category", "pk": 148, "fields": {"name":"Headphones", "parentPk":143,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 149, "fields": {"name":"Headsets", "parentPk":143,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 150, "fields": {"name":"Microfones", "parentPk":143,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 151, "fields": {"name":"Colunas", "parentPk":143,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 152, "fields": {"name":"Colunas Portáteis", "parentPk":143,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 153, "fields": {"name":"Acessórios", "parentPk":143,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 154, "fields": {"name":"Ratos", "parentPk":144,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 155, "fields": {"name":"Teclados", "parentPk":144,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 156, "fields": {"name":"Conjuntos", "parentPk":144,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 157, "fields": {"name":"Tapetes", "parentPk":144,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 158, "fields": {"name":"Apontadores", "parentPk":144,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 159, "fields": {"name":"Acessórios", "parentPk":144,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 160, "fields": {"name":"Câmaras Web", "parentPk":146,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 161, "fields": {"name":"Sistemas de Videoconferência", "parentPk":146,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 162, "fields": {"name":"Speakerphones", "parentPk":146,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 163, "fields": {"name":"Placas de Captura de Vídeo", "parentPk":147,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 164, "fields": {"name":"Controladores de Criação de Conteúdo", "parentPk":147,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 165, "fields": {"name":"Soft Boxes e Luzes", "parentPk":147,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 166, "fields": {"name":"Green Screens", "parentPk":147,"depth":2,"udc": 3}},
+    
+
+
+    {"model": "products.category", "pk": 167, "fields": {"name":"Mesas Digitalizadoras", "parentPk":140,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 167, "fields": {"name":"Monitores Interativos", "parentPk":140,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 169, "fields": {"name":"Smartpads", "parentPk":140,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 170, "fields": {"name":"Canetas para Design Gráfico", "parentPk":140,"depth":2,"udc": 3}},
+
+
+
+    {"model": "products.category", "pk": 171, "fields": {"name":"Impressoras Jacto de Tinta", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 172, "fields": {"name":"Impressoras Laser", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 173, "fields": {"name":"Impressoras POS / Talões", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 174, "fields": {"name":"Scanners", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 175, "fields": {"name":"Tinteiros", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 176, "fields": {"name":"Toners", "parentPk":141,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 177, "fields": {"name":"Papel de Impressão", "parentPk":141,"depth":2,"udc": 3}},
+
+
+
+
+    {"model": "products.category", "pk": 178, "fields": {"name":"UPS Standby (Off-Line)", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 179, "fields": {"name":"UPS Line-Interactive", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 180, "fields": {"name":"UPS Online", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 181, "fields": {"name":"Energia Portátil", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 182, "fields": {"name":"Pilhas", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 183, "fields": {"name":"Supressores de Picos e Blocos de Tomadas", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 184, "fields": {"name":"Acessórios", "parentPk":142,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 185, "fields": {"name":"Baterias UPS", "parentPk":142,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 186, "fields": {"name":"Armazenamento Interno", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 187, "fields": {"name":"Armazenamento Externo", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 188, "fields": {"name":"Armazenamento em Rede", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 189, "fields": {"name":"Pen Drives", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 190, "fields": {"name":"Leitores de Cartões", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 191, "fields": {"name":"Adaptadores de Armazenamento", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 192, "fields": {"name":"Caixas Externas e Docking", "parentPk":6,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 193, "fields": {"name":"Cartões de Memória", "parentPk":6,"depth":1,"udc": 3}},
+
+    {"model": "products.category", "pk": 194, "fields": {"name":"Solid State Drives (SSD)", "parentPk":186,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 195, "fields": {"name":"Discos Rígidos (HDD)", "parentPk":186,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 196, "fields": {"name":"Solid State Drives (SSD)", "parentPk":187,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 197, "fields": {"name":"Discos Rígidos (HDD)", "parentPk":187,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 198, "fields": {"name":"Acessórios", "parentPk":187,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 199, "fields": {"name":"Caixas e Sistemas NAS", "parentPk":188,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 200, "fields": {"name":"Armazenamento Cloud Pessoal", "parentPk":188,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 201, "fields": {"name":"Acessórios", "parentPk":188,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 202, "fields": {"name":"USB 3.2", "parentPk":189,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 203, "fields": {"name":"USB 3.1", "parentPk":189,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 203, "fields": {"name":"USB 2.0", "parentPk":189,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 205, "fields": {"name":"USB 3.0", "parentPk":189,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 206, "fields": {"name":"Leitores de Cartões do Cidadão", "parentPk":190,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 207, "fields": {"name":"Leitores de Cartões de Memória", "parentPk":190,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 208, "fields": {"name":"Caddys para Drives Ópticas", "parentPk":191,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 209, "fields": {"name":"Brackets 5.25", "parentPk":191,"depth":2,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 210, "fields": {"name":"Caixas Externas M.2", "parentPk":192,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 211, "fields": {"name":"Caixas Externas SATA 2.5", "parentPk":192,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 212, "fields": {"name":"Caixas Externas SATA 3.5", "parentPk":192,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 213, "fields": {"name":"Caixas Externas IDE 2.5", "parentPk":192,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 214, "fields": {"name":"Docking Stations", "parentPk":192,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 215, "fields": {"name":"Cartões de Memória SD", "parentPk":193,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 216, "fields": {"name":"Cartões de Memória MicroSD", "parentPk":193,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 217, "fields": {"name":"Cartões de Memória CompactFlash", "parentPk":193,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 218, "fields": {"name":"Cartões de Memória NanoSD", "parentPk":193,"depth":2,"udc": 3}},
+   
+
+    {"model": "products.category", "pk": 219, "fields": {"name":"Acess Points / Repetidores", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 220, "fields": {"name":"Bluetooth", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 221, "fields": {"name":"Placas de Rede", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 222, "fields": {"name":"Powerlines", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 223, "fields": {"name":"Routers / Modems", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 224, "fields": {"name":"Switch", "parentPk":7,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 225, "fields": {"name":"Antenas", "parentPk":7,"depth":1,"udc": 3}},
+
+
+    {"model": "products.category", "pk": 226, "fields": {"name":"LAN / Wired", "parentPk":221,"depth":2,"udc": 3}},
+    {"model": "products.category", "pk": 227, "fields": {"name":"Wireless / Wi-Fi", "parentPk":221,"depth":2,"udc": 3}},
+
+    {"model": "products.category", "pk": 228, "fields": {"name":"Conectividade HDMI", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 229, "fields": {"name":"Conectividade DisplayPort", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 230, "fields": {"name":"Conectividade Mini DisplayPort", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 231, "fields": {"name":"Conectividade DVI", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 232, "fields": {"name":"Conectividade VGA", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 233, "fields": {"name":"Conectividade USB-C", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 234, "fields": {"name":"Conectividade USB", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 235, "fields": {"name":"Conectividade de Rede", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 236, "fields": {"name":"Alimentação e Dados", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 237, "fields": {"name":"Conectividade de Áudio", "parentPk":12,"depth":1,"udc": 3}},
+    {"model": "products.category", "pk": 238, "fields": {"name":"Limpeza de Hardware", "parentPk":12,"depth":1,"udc": 3}}
+
+
+
+
+  
+
+    
 
 ]
