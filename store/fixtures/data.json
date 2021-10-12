@@ -1,17 +1,9 @@
 [
 
 
-    {"model": "products.product", "pk": 1, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":100, "stock":4}},
-    {"model": "products.product", "pk": 2, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":120 , "stock":4}},
-    {"model": "products.product", "pk": 3, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":30 , "stock":4}},
-    {"model": "products.product", "pk": 4, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":81 , "stock":4}},
-    {"model": "products.product", "pk": 5, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":23.52 , "stock":4}},
-    {"model": "products.product", "pk": 6, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":89 , "stock":4}},
-    {"model": "products.product", "pk": 7, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":65 , "stock":4}},
-    {"model": "products.product", "pk": 8, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":92.25 , "stock":4}},
+    
 
-
-    {"model": "orders.shipment", "pk": 1, "fields": { "name":"CTT Expresso","price":3.20}},
+    {"model": "orders.shipment", "pk": 1, "fields": { "name":"CTT Expresso","price":3.0}},
     {"model": "orders.shipment", "pk": 2, "fields": { "name":"Levantamento na Loja","price":0}},
 
     {"model": "products.category", "pk": 1, "fields": {"name":"Computadores", "udc": 0}},
