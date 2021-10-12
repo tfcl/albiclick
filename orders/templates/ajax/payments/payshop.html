@@ -1,0 +1,21 @@
+<div style="padding-left:20px" class="div-payment pr-4">
+
+<form  class="form" action="{% url 'checkout-payment'%}" method="post" >
+{% csrf_token %}
+
+<input class="w-100 form-control " type="hidden" name="shipment" value="">
+<input  type="hidden" name="payment-method" value="payshop">
+
+
+<div class="form-group ">
+<p>Deseja adicionar algum comentário à sua encomenda?</p>
+<input class="w-100 form-control "type="text" name="note" class="">
+</div>
+
+
+
+</form>
+
+
+<a class="btn btn-main order-submit">Finalizar</a>
+</div>

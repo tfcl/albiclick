@@ -1,0 +1,36 @@
+[
+
+
+    {"model": "products.product", "pk": 1, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":100, "stock":4}},
+    {"model": "products.product", "pk": 2, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":120 , "stock":4}},
+    {"model": "products.product", "pk": 3, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":30 , "stock":4}},
+    {"model": "products.product", "pk": 4, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":81 , "stock":4}},
+    {"model": "products.product", "pk": 5, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":23.52 , "stock":4}},
+    {"model": "products.product", "pk": 6, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":89 , "stock":4}},
+    {"model": "products.product", "pk": 7, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":65 , "stock":4}},
+    {"model": "products.product", "pk": 8, "fields": { "name":"Grafica xpto","description":"A grafica da tua vida","price":92.25 , "stock":4}},
+
+
+    {"model": "orders.shipment", "pk": 1, "fields": { "name":"CTT Expresso","price":3.20}},
+    {"model": "orders.shipment", "pk": 2, "fields": { "name":"Levantamento na Loja","price":0}},
+
+    {"model": "products.category", "pk": 1, "fields": {"name":"Computadores", "udc": 0}},
+    {"model": "products.category", "pk": 2, "fields": {"name":"Mobilidade", "udc": 1}},
+    {"model": "products.category", "pk": 3, "fields": {"name":"Componentes", "udc": 2}},
+    {"model": "products.category", "pk": 4, "fields": {"name":"Imagem e Som", "udc": 3}},
+    {"model": "products.category", "pk": 5, "fields": {"name":"Periféricos", "udc": 5}},
+    {"model": "products.category", "pk": 6, "fields": {"name":"Armazenamento", "udc": 6}},
+
+    
+    {"model": "products.category", "pk": 7, "fields": {"name":"Portáteis", "parentPk":1,"depth":1,"udc": 1}},
+    {"model": "products.category", "pk": 8, "fields": {"name":"Desktops", "parentPk":1,"depth":1,"udc": 2}},
+    {"model": "products.category", "pk": 9, "fields": {"name":"Mini PCs", "parentPk":1,"depth":1,"udc": 3}},
+
+    
+    {"model": "products.category", "pk": 10, "fields": {"name":"Gaming", "parentPk":7,"depth":2,"udc": 1}},
+    {"model": "products.category", "pk": 11, "fields": {"name":"Produtividade", "parentPk":8,"depth":2,"udc": 2}},
+    {"model": "products.category", "pk": 12, "fields": {"name":"i3", "parentPk":9,"depth":2,"udc": 3}}
+    
+
+
+]

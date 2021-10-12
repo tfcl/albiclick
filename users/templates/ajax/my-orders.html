@@ -1,0 +1,36 @@
+<div id="my-orders"class="right">
+
+<h1 class="h2 font-weight-bold mb-4">As minhas Encomendas</h1>
+<div class="info">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Estado</th>
+      <th scope="col">Data</th>
+      <th scope="col">Tracking Number</th>
+      <th scope="col">Ref</th>
+      <th scope="col">valor (€)</th>
+      <th class="text-center" scope="col">Detalhes</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for order in orders %}
+      <tr>
+      <th scope="row">{{ order.get_state_display }}</th>
+      <td>{{ order.creation_date }}</td>
+      <td>{{ order.adress.tracking_number }}</td>
+      <td>{{ order.payment.pk }}</td>
+      <td>{{ order.total }} €</td>
+      <td class="text-center"><a href="{% url 'order-details' order.pk %}" class="brand-color "><i class="fas fa-info-circle"></i><a></td>
+
+    </tr>
+    {% endfor%}
+    
+  </tbody>
+</table>
+
+
+</div>
+</div>

@@ -1,0 +1,465 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<style>
+
+.layer1, .layer2{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.price-slider input {
+  pointer-events: none;
+}
+
+
+.price-slider input::-webkit-slider-thumb {
+  pointer-events: all;
+  position: relative;
+  z-index: 1;
+  outline: 0;
+  height: 24px;
+  widows: 24px;
+  border-radius: 12px;
+  background-color: white;
+  border: 2px solid black;
+  -webkit-appearance: none;
+  display:none
+}
+
+.price-slider input::-moz-range-thumb {
+  pointer-events: all;
+  position: relative;
+  z-index: 1;
+  outline: 0;
+  height: 24px;
+  widows: 24px;
+  border-radius: 12px;
+  background-color: white;
+  border: 2px solid black;
+  -moz-appearance: none;
+  display:none
+}
+input::-moz-range-track {
+  background: #ccc;
+  z-index=2
+  display:none
+}
+input[type=range]::-webkit-slider-runnable-track {
+
+   opacity:100%;
+}
+
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+    opacity:100%;
+}
+</style>
+
+
+<div id="overlay-menu" class="menu">
+ <img class="btn-close left" src=" {% static 'store/images/icons/close.svg' %}"alt="logo" style=" margin-left:15px; "> 
+<h1 class="h2 mb-4 ml-5">Filtrar:</h1>
+
+
+
+</div>
+
+<div style="min-width:1000px"class="main">
+
+
+
+<div class="d-flex ">
+
+<a href="{% url 'index' %}" class="mr-1 nostyle">Home</a>
+
+
+{% if category_path %}
+
+{% for category in category_path%}
+
+<p class="mr-1">><p>
+<a href="{% url 'see-products-args' category.pk%}" class="mr-1 nostyle  {% if forloop.last %}
+   
+font-weight-bold brand-color
+{% endif %}
+
+">{{category.name}}</a>
+
+{% endfor%}
+{% else %}
+<p class="mr-1">><p>
+
+<a href="#" class="mr-1 nostyle font-weight-bold brand-color">{{title}}</a>
+
+{% endif %}
+</div>
+
+
+<div  class="py-3 px-0 mb-3" style="background-color:#9b41600a">
+<h1 class="h1  " style="font-weight:600">{{ title }}</h1>
+<hr class="hr " align="left">
+
+</div>
+
+
+<div class="row px-3"> 
+    <div id="" class="filter-menu col-sm-6 col-lg-2 filters menu2">
+ <a class="btn-close brand-color hide-menu" style=" "> <i class="fas fa-arrow-circle-left"></i></a>
+    
+                 <p class="h5 brand-color mb-5">Filtros de Compra</p>
+        <div>
+            <div data-toggle="stock" style="cursor:pointer" class="btn-filter d-flex justify-content-between align-items-center">
+                <h5 class="h5">STOCK</h5>
+                <i  class="fas fa-sort-up brand-color pointer" ></i>
+            </div>
+            
+            <hr class="mt-0">    
+            <div id="stock" style="display:none; " class="mb-2">
+                <div class="form-check mb-1">
+                    <input type="checkbox" class="form-check-input" id="sem-stock">
+                    <label class="form-check-label" for="sem-stock">Sem Stock</label>
+                </div>
+                <div class="form-check mb-1">
+                    <input type="checkbox" class="form-check-input" id="com-stock">
+                    <label class="form-check-label" for="com-stock">Com Stock</label>
+                </div>
+            </div>
+        </div>
+                <div>
+            <div data-toggle="price" style="cursor:pointer" class="btn-filter d-flex justify-content-between align-items-center">
+                <h5 class="h5">Preço</h5>
+                <i  class="fas fa-sort-up brand-color pointer"></i>
+            </div>
+            
+            <hr class="mt-0">    
+            <div id="price" style="display:none; " class=" mb-2">
+            <p>
+ 
+    <input type="text" id="amount" class="brand-color"readonly style="border:0; font-weight:bold;">
+
+</p>
+<div id="slider-range"></div>
+
+                   
+            </div>
+        </div>
+                <div>
+
+
+            <div data-toggle="category" style="cursor:pointer" class="btn-filter d-flex justify-content-between align-items-center">
+                <h5 class="h5">CATEGORIA</h5>
+                <i  class="fas fa-sort-down brand-color pointer"></i>
+            </div>
+            
+            <hr class="mt-0">    
+            <div id="category" style="display:block; " class="">
+
+                {% for category in categories%}
+                <div class="form-check mb-1">
+                    <input type="checkbox" value="{{category.pk}}" class="form-check-input filter-categories" id="{{category.pk}}">
+                    <label class="form-check-label" for="{{category.pk}}">{{category.name}}</label>
+                </div>
+               {% endfor%}
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="col">
+        <div class="d-flex align-items-center"> 
+        <button id="filter-btn" class="brand-color btn-lg mr-3"><i class="  fas fa-filter"></i></button>
+        <div class="d-flex align-items-center">
+
+        
+
+
+        <p class="mx-2 brand-color font-weight-bold my-0">Ordenar Por:  </p>
+        <div class="dropdown">
+            <a style="cursor:pointer ;min-width:95px; display:inline-block" class=" dropdown-toggle" type="" id="text-order" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Selecione
+            </a>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item btn-order filter" data-param="orderby" data-name="price" type="button">Preço</button>
+                <button class="dropdown-item btn-order filter" data-param="orderby" data-name="stock" type="button">Stock</button>
+                
+            </div>
+
+            </div>
+
+            <a id="btn-order-dir" class="h3 ml-2 filter" data-param="orderby_dir" data-name="asc" > <i class=" fas fa-long-arrow-alt-up brand-color"></i> </a>
+        </div>
+
+
+        </div>
+        <div id="see-products"> 
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+</div>
+
+
+<script>
+var category_pk= {% firstof category.pk "-1"  %}
+
+var jsonFilters={'orderby_dir':'asc','category':[category_pk] }
+
+{% if flag_search %}
+   jsonFilters['search_filter']="{{flag_search}}"
+{% endif %}
+
+{% if flag_destaques%}
+   jsonFilters['flag_destaques']=true
+
+
+{% endif%}
+
+{% if flag_novidades%}
+   jsonFilters['flag_novidades']=true
+
+
+{% endif%}
+
+
+$(document).on('click', '#filter-btn', function(){
+
+
+    console.log("click")
+  createGray2();
+  $(".filter-menu").css('display', 'block');
+
+});
+
+
+function ajax_get_page(page, json){
+$.ajax({     
+
+            url:"{% url 'ajax-see-products' %}",
+            type:"GET",           
+            data: {
+                'page':page,
+                'json':JSON.stringify(json),
+                
+            },
+            success: function (data) {
+                
+                $("#see-products").empty()
+                $("#see-products").append(data)
+            },
+            
+        });
+
+
+}
+
+function ajax_update(json){
+
+$.ajax({     
+
+            url:"{% url 'ajax-see-products' %}",
+            type:"GET",           
+            data: {
+                page:"1",
+                'json':JSON.stringify(json),
+                
+            },
+            success: function (data) {
+                
+                $("#see-products").empty()
+                $("#see-products").append(data)
+                flag_ongoing=false;
+            },
+            
+        });
+
+
+
+
+}
+
+$( "#slider-range" ).on( "slidechange", function( event, ui ) {
+
+    jsonFilters["price-filter"]=$(this).slider( "values" )
+    console.log(jsonFilters);
+    ajax_update(jsonFilters);        
+
+
+} );
+
+
+
+ $( ".btn-filter" ).click(function() {
+     console.log("dsd")
+  let div_id=$(this).data("toggle");
+     console.log($(div_id))
+
+    $("#"+div_id).toggle();
+
+    if($(this).find("i").hasClass("fa-sort-up")){
+        $(this).find("i").removeClass("fa-sort-up")
+        $(this).find("i").addClass("fa-sort-down")
+    }
+    else if($(this).find("i").hasClass("fa-sort-down")){
+        $(this).find("i").removeClass("fa-sort-down")
+        $(this).find("i").addClass("fa-sort-up")
+
+    }
+
+ }
+);
+
+
+var flag_products=false
+$( document ).ready(function() {
+
+        jsonFilters['flag_first_load']=true;
+        if (flag_products===false){
+            console.log("ajax docuemnt ready")
+            $.ajax({                       
+            url:"{% url 'ajax-see-products' %}",
+            type:"GET",           
+            data: {
+                page:"1",
+                'json':JSON.stringify(jsonFilters),
+            },
+            success: function (data) {
+               
+                delete jsonFilters['flag_first_load']
+                $("#see-products").append(data)
+                
+
+                flag_products=true
+
+                            $( function() {
+                $( "#slider-range" ).slider({
+                range: true,
+                min: parseInt($("#min_price").val()),
+                max: parseInt($("#max_price").val()),
+                values: [ 0, 300 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "€" + ui.values[ 0 ] + " - €" + ui.values[ 1 ] );
+                }
+                });
+                $( "#amount" ).val( "€" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - €" + $( "#slider-range" ).slider( "values", 1 ) );
+            } );
+                        },
+            
+        });
+
+            
+
+        }
+
+});
+{% comment %} Atenção tem que inicializar igual ao data-name do butao (a setinha) {% endcomment %}
+
+
+
+
+
+$(document).on('change', '.filter-categories', function(){
+
+
+    console.log($("input:checked.filter-categories"))
+
+    
+    delete jsonFilters['category']
+    var temp_categories=[]
+    $( "input:checked.filter-categories" ).each(function() {
+
+        temp_categories.push($( this ).val())
+        jsonFilters['category']=temp_categories
+        
+
+    });
+
+
+    if (temp_categories.length===0){
+        category_pk = {% firstof category.pk '-1'  %}
+        jsonFilters['category']=[category_pk];
+
+    }
+    ajax_update(jsonFilters);        
+
+    console.log(jsonFilters['category'])
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).on('click', '.filter', function(){
+    let param=$(this).data("param");
+
+    
+    let name=$(this).data("name");
+
+    jsonFilters[param]=name;
+ 
+    console.log(jsonFilters)
+            console.log("ajax")
+
+
+    ajax_update(jsonFilters);        
+
+  
+}); 
+
+
+ $( "#btn-order-dir" ).click(function() {
+
+    
+    if($(this).data('name')==='desc'){
+        console.log("from btn-ass")
+        $(this).data('name','asc');
+        $(this).find("i").addClass('fa-long-arrow-alt-up')
+        $(this).find("i").removeClass('fa-long-arrow-alt-down')
+
+    }
+    else{
+        $(this).data('name','desc');
+        $(this).find("i").addClass('fa-long-arrow-alt-down')
+        $(this).find("i").removeClass('fa-long-arrow-alt-up')
+    }   
+
+ });
+
+ 
+ $( ".btn-order" ).click(function() {
+     console.log($(this).text())
+    $('#text-order').text($(this).text())
+
+ });
+
+</script>
+
+{% endblock content%}

@@ -1,0 +1,145 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'store/stylesheets/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<div class="main">
+
+    <h1>Detalhes da sua encomenda</h1>
+    <p>Boa Tarde a sua encomenda encontra-se a Aguardar Pagamento, pode consultar os dados para pagamento em baixo.</p>
+
+
+
+
+    <div class="row py-2 mb-4 bg-brand-color-2" >
+        <div class="col">
+            <h5 class="h4 brand-color">Dados para Pagamento:</h5>
+            <h6 class="h6 font-weight-bold mb-3">{{ order.payment.name}} </h6>
+            {% for detail in order.payment.detail_set.all%}
+            <p class="mb-1"><span class="font-weight-bold">{{detail.title}}:</span> {{detail.description}}</p>
+            {% endfor%}
+            
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row mt-2">
+    <div class="col-md-12 col-lg-6">
+    
+
+    <p><span class="font-weight-bold">Encomenda Nº:</span> {{order.pk}}</p>  
+    <p><span class="font-weight-bold">Data de Compra:</span> {{order.creation_date}}</p>   
+    <p><span class="font-weight-bold">Método de Envio:</span> {{ order.shipment.name}}</p>   
+
+    </div>
+    <div class="col-md-12 col-lg-6">
+    <p><span class="font-weight-bold">Valor:</span> {{order.total}} €</p>  
+    <p><span class="font-weight-bold">Notas:</span> {{order.note}}</p>  
+
+    <p></p>   
+    </div>
+
+</div>
+
+<div class="pt-3">
+
+<h2 class="h4 pb-4 brand-color">Detalhes do envio: </h2>
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ref</th>
+
+      <th scope="col">Produto</th>
+      <th scope="col">QTD</th>
+      <th scope="col">Preço (€)</th>
+      <th scope="col">Total (€) </th>
+      
+
+    
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for item in order.cart.items.all %}
+    <tr>
+      <th scope="row">{{ item.product.pk }}</th>
+
+      <th >{{ item.product.name }}</th>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.product.price }}</td>
+      <td>{{ item.total }}</td>
+      
+      
+
+    </tr>
+
+    {% endfor%}
+    
+
+    </div>
+    
+
+  </tbody>
+</table>
+<div class="row ml-0 ">
+        <div class="">
+            <table class="table borderless">
+            <tbody>
+                <tr class="h6">
+                    <th class="text-right   brand-color">Sub-total:</th>
+                    <th>{{ order.cart.total }} €</th>
+
+                </tr>
+                                <tr class="h6">
+                    <th  class="text-right  brand-color">Portes:</th>
+                    <th>{{  order.shipment.price }} €</th>
+                </tr>
+                                <tr class="h6">
+                     <th class="text-right brand-color">Total:</th>
+                    <th>{{  order.total}} €</th>
+                </tr>
+            </tbody>
+            </table>
+
+      
+
+        </div>
+</div>
+
+<div class="mt-4 row  justify-content-center">
+
+<div class="col-md-12 col-lg-6">
+<h4 class="h5 ml-0 brand-color">Morada de Envio</h4>
+
+<p>{{order.adress.receiver}}</p>
+<p>{{order.adress.street}}</p>
+<p>{{order.adress.postal_code}}, {{order.adress.city}} </p>
+<p>tel: {{order.adress.contact}}</p>
+<p>nif: {% firstof order.adress.nif "Sem nif"  %} </p>
+
+
+
+</div>
+
+<div class="col-md-12 col-lg-6">
+<h4 class="h5 ml-0 brand-color">Morada de Faturação</h4>
+{% if order.adress_billing%}
+<p>{{order.adress_billing.receiver}}</p>
+<p>{{order.adress_billing.street}}</p>
+<p>{{order.adress_billing.postal_code}}, {{order.adress_billing.city}} </p>
+<p>tel: {{order.adress_billing.contact}}</p>
+<p>nif: {% firstof order.adress_billing.nif "Sem nif"  %} </p>
+{% else%}
+<p>Por defeito a sua morada de faturação foi igual à sua morada de Envio</p>
+
+{% endif %}
+</div>
+</div>
+
+<h4 class="h5 ml-0 pt-2 brand-color">Método de Pagamento</h4>
+<p>{{order.payment.name}}</p>
+
+
+</div>

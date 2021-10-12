@@ -1,0 +1,130 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="main dash">
+<div class="left">
+<div>
+<h1 class="h4 brand-color ">Olá, {{user.username}}</h1>
+<a class="anchor">Logout</a>
+</div>
+<div class="my-account">
+<h1 class="h3 mb-3">Painel de Conta</h1>
+<a data-url="{% url 'ajax-get-account'%}" class="anchor ">A Minha Conta</a>
+<a data-url="{% url 'ajax-get-my-orders'%}" class="anchor">As Minhas Encomendas</a>
+<a data-url="{% url 'ajax-get-my-adresses'%}" class="anchor">As Minhas Moradas</a>
+<a data-url="{% url 'ajax-edit-account'%}" class="anchor">Informações Da Conta</a>
+</div>
+
+</div>
+
+
+
+<div class="right">
+{% block contentRight %}
+
+
+{% endblock contentRight %}
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<script>
+$( document ).ready(function() {
+    $( ".my-account a" ).each(function() {
+
+        console.log("-----------------------------------")
+        console.log($(this).data('url'));
+        console.log("{{url}}")
+
+        console.log("-----------------------------------")
+
+        if($(this).data('url')=="{{url}}"){
+            $(this).addClass( "active" );
+            
+        }
+
+
+    });
+  
+});
+let current_div=($(".dash .right"))
+
+
+
+
+$(".my-account a").click(function() {
+    $(".my-account a").removeClass( "active" );
+    $( this ).addClass( "active" );
+    let url=$( this ).data('url');
+
+    let div_id=url.split("/")
+
+    
+    
+    div_id="#"+div_id[div_id.length-2]
+    let select_div=$(div_id)
+
+    console.log('--------------------');
+    console.log(current_div);
+    console.log($(div_id));
+
+
+    console.log('--------------------');
+
+    if(current_div[0]===select_div[0]){
+
+
+
+    }
+
+    else{
+
+        
+        if ($(div_id).length===0){
+
+            $.ajax({                       
+        url:url,
+                        
+        data: {
+            
+        },
+        success: function (data) {
+            console.log(div_id)
+            current_div.toggle();
+            $(".dash").append(data);
+            current_div=($(div_id));
+        },
+        
+    });
+
+        }
+        else{
+            current_div.toggle();
+
+            
+           select_div.toggle();
+            console.log("existe")
+            current_div=($(div_id));
+
+        }
+
+
+    }
+
+
+});
+
+</script>
+
+{% endblock %}
+

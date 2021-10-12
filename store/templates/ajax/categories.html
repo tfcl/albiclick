@@ -1,0 +1,5 @@
+{% for category in categories%}
+<a href={% url 'see-products-args' category.pk%} class="anchor mb-1 nostyle ml-5">{{category.name}}</a>
+
+{% endfor%}
+<a href={% url 'see-products' %} class="anchor mb-1 nostyle ml-5">Ver Todos</a>
