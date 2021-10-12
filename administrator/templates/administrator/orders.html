@@ -1,0 +1,305 @@
+{% extends 'base-admin.html' %}
+
+
+
+{% load static %}
+
+{% block contentRight %} 
+
+<style>
+.page-item .selected{
+
+     background-color: #872547;
+    font-weight: bolder;
+    color: white!important;
+}
+
+.page-item .page-link{
+    font-weight: bolder;
+
+
+}
+
+.fill-aux{
+  min-width:250px
+
+}
+
+
+</style>
+
+       <div class="d-flex align-items-center"> 
+
+
+
+        <div class="button-group mr-1">
+        <button type="button" class="btn btn-default brand-color btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fas fa-filter"></i></button>
+<ul class="dropdown-menu px-1">
+  <li><a href="#" class="nostyle filter" data-value="option1" tabIndex="-1"><input value="1"type="checkbox"/> A Aguardar Pagamento</a></li>
+  <li><a href="#" class="nostyle filter" data-value="option1" tabIndex="-1"><input value="2"type="checkbox"/> Pagamento Confirmado</a></li>
+
+  <li><a href="#" class="nostyle filter" data-value="option2" tabIndex="-1"><input value="3" type="checkbox"/> A Processar</a></li>
+  <li><a href="#" class="nostyle filter" data-value="option3" tabIndex="-1"><input value="4" type="checkbox"/> Enviada</a></li>
+ 
+</ul>
+
+
+
+
+  </div>
+
+
+  
+        <div class="button-group">
+        <button type="button" class="btn btn-default brand-color btn-sm dropdown-toggle" data-toggle="dropdown"><i class="far fa-calendar-alt"></i></button>
+<ul class="dropdown-menu px-2">
+        
+  <li>
+  <span>De</span>
+  <input style="max-width:100px"class="ml-1 datepicker date"  data-name="date-start" id="date-start" type="text" >
+  <span class="ml-2">a</span>
+  <input style="max-width:100px" class="ml-1 datepicker date" data-name="date-end" id="date-end" type="text" >
+  
+  
+  <a id="btn-date-search"class="btn btn-main mt-0">Pesquisar</a>
+  </li>
+  
+  <li>
+  <a id="btn-clean-date"class="nostyle"><i class="fas fa-times"></i> Limpar</a>
+  </li> 
+</ul>
+
+
+
+
+  </div>
+        <div class="d-flex align-items-center">
+        <p class="mx-2 brand-color font-weight-bold my-0">Ordenar Por:  </p>
+        <div class="dropdown">
+            <a style="cursor:pointer ;min-width:95px; display:inline-block" class=" dropdown-toggle" type="" id="text-order" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Selecione
+            </a>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item btn-order " data-param="orderby" data-name="date" type="button">Data</button>
+                <button class="dropdown-item btn-order " data-param="orderby" data-name="total" type="button">Valor da Encomenda</button>
+                
+            </div>
+
+            </div>
+
+            <a id="btn-order-dir" class="h3 ml-2 " data-param="orderby_dir" data-name="asc" > <i class=" fas fa-long-arrow-alt-up brand-color"></i> </a>
+        </div>
+
+<input style="min-width: 180px;" id="search"class="ml-5" type="text" placeholder="Pesquisar por Referencia"> 
+
+
+</div>
+
+
+
+<div id="list-orders">
+
+</div>
+<script>
+
+
+var jsonFilters={'orderby_dir':'asc' }
+
+$('.date').datepicker(
+        {
+   dateFormat: 'yy-mm-dd',
+        }
+
+
+);
+$(function () {
+    $.datepicker.setDefaults({
+        showOn: "focus",
+        dateFormat: "dd/mm/yy",
+        dayNames: ["Domingo", "Segunda", "Terça", "Quarte", "Quinta", "Sexta", "Sábado"],
+        dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+});
+
+});
+
+
+
+
+
+
+
+
+
+
+
+ function ajax_get_page(page, json){
+$.ajax({     
+
+            url:"{% url 'ajax-administrator-orders' %}",
+            type:"GET",           
+            data: {
+                'page':page,
+                'json':JSON.stringify(json),
+                
+            },
+            success: function (data) {
+                
+                $("#list-orders").empty()
+                $("#list-orders").append(data)
+            },
+            
+        });
+
+
+}
+
+
+
+
+
+
+function ajax_update(json){
+
+$.ajax({     
+
+            url:"{% url 'ajax-administrator-orders' %}",
+            type:"GET",           
+            data: {
+                page:"1",
+                'json':JSON.stringify(json),
+                
+            },
+            success: function (data) {
+                
+                $("#list-orders").empty()
+                $("#list-orders").append(data)
+                
+            },
+            
+        });
+
+
+
+
+}
+$( document ).ready(function() {
+    ajax_update(jsonFilters)
+
+});
+
+$('#search').on('keypress', function (e) {
+         if(e.which === 13){
+            if($(this).val()===""){
+                delete jsonFilters['search']
+
+            }
+            else{
+            jsonFilters['search']=$(this).val()
+
+            }
+            ajax_update(jsonFilters)
+         }
+});
+
+
+$(document).on('change', '.filter', function(){
+    console.log("click")
+    var temp_filters=[]
+
+    delete jsonFilters['filters']
+
+    $( ".filter input:checked" ).each(function() {
+
+        temp_filters.push($( this ).val())
+        
+
+    });
+        if (temp_filters.length!==0){
+        jsonFilters['filters']=temp_filters
+            
+
+    }
+    ajax_update(jsonFilters);
+        console.log(jsonFilters)
+
+
+});
+
+ $( "#btn-date-search" ).click(function() {
+     ajax_update(jsonFilters)
+
+
+ });
+
+ $( "#btn-clean-date" ).click(function() {
+     console.log("clcik")
+        $(".date").val("");
+        delete jsonFilters["date-start"]
+        delete jsonFilters["date-end"]
+        console.log(jsonFilters)
+        ajax_update(jsonFilters);
+
+ });
+
+
+$( ".date" ).change(function() {
+    console.log("change")
+    jsonFilters[$(this).data("name")]=$(this).val()
+    console.log(jsonFilters)
+
+
+});
+
+
+ $( ".btn-order" ).click(function() {
+     console.log("click")
+     jsonFilters['order_by']=$(this).data("name")
+    $('#text-order').text($(this).text())
+
+     ajax_update(jsonFilters);
+
+ });
+
+
+ $( "#btn-order-dir" ).click(function() {
+
+    
+    if($(this).data('name')==='desc'){
+
+        jsonFilters["orderby_dir"]="asc"
+        console.log("from btn-ass")
+        $(this).data('name','asc');
+        $(this).find("i").addClass('fa-long-arrow-alt-up')
+        $(this).find("i").removeClass('fa-long-arrow-alt-down')
+        ajax_update(jsonFilters);
+
+    }
+    else{
+        jsonFilters["orderby_dir"]="desc"
+
+        $(this).data('name','desc');
+        $(this).find("i").addClass('fa-long-arrow-alt-down')
+        $(this).find("i").removeClass('fa-long-arrow-alt-up')
+        ajax_update(jsonFilters);
+    }   
+
+ });
+
+$(document).on('click', '.page-link', function(){
+  
+  
+  
+  console.log($(this));
+   ajax_get_page($(this).data("page"), jsonFilters);
+   
+ });
+
+
+
+
+ {% comment %} Estou a repetir código {% endcomment %}
+</script>
+
+{% endblock %}
+

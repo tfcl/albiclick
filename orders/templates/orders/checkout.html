@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} 
+
+
+
+
+<div class="main pl-4 pb-5">
+
+  <h1 class="">Checkout</h1>
+  <h2 class="pb-4 brand-color">Confirmar encomenda</h2>
+  <div class="pb-4 pr-4" id="checkout-order">
+    <h1 class="h2 font-weight-bold mb-4 ">Carrinho</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Produto</th>
+          <th scope="col">QTD</th>
+          <th scope="col">Preço (€)</th>
+          <th scope="col">Total (€) </th>
+          
+
+          
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for item in cart.items.all %}
+        <tr>
+          <th scope="row">{{ item.product.name }}</th>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product.price }}</td>
+          <td>{{ item.total }}</td>
+          
+          
+
+        </tr>
+
+        {% endfor%}
+        <tr>
+          <th scope="row">Total (€): {{ cart.total }}</th>
+          
+          
+          
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+  <div id="checkout-adresses">
+    
+    {% include "ajax/adresses.html" %}
+  </div>
+  <div class=" mt-4" id="checkout-personal">
+    <h1 class="h2 font-weight-bold mb-4">Dados Pessoais</h1>
+
+    <div class="form-group row">
+      <label for="first-name" class="col-sm-1 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input readonly id="" type="text" value="{{user.email}}" class="form-control" > 
+        
+
+      </div>
+    </div>
+
+
+
+    <a href="{% url 'checkout-payment'%}" class="btn btn-main">Confirmar Dados</a>
+  </div>
+</div>
+  <script>
+
+    var flag_sucess=false
+
+  </script>
+  {% endblock %}
+

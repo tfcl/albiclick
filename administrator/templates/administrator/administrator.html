@@ -1,0 +1,92 @@
+{% extends 'base-admin.html' %}
+
+
+
+{% load static %}
+
+{% block contentRight %} 
+<style>
+
+    .header{
+        justify-content: space-between;
+
+    }
+
+    .header .elem{
+        
+        max-width: 24%;
+        max-height:;
+        border:3px solid #80173b;
+        border-radius:10px;
+    }
+    
+
+</style>
+<div class="row header px-4 mx-0">
+        
+    <div class="col elem d-flex px-1 py-3">
+        <div class="" style="max-width:80%">
+            <p style="min-height:39px" class="h6 font-weight-bold brand-color ml-1">Vendas deste mês:</p>
+
+
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">12<p></div>
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class=" fas fa-arrow-alt-circle-up"></i> <p class="font-weight-bold  m-0 ml-1">12% em relação ao mês anterior<p></div>
+
+            
+        </div>
+        <div style="flex: 1" class="brand-color d-flex align-items-center justify-content-center h1" ><i class="fas fa-euro-sign"></i></div>
+
+    </div>
+    <div class="col elem d-flex px-1 py-3">
+        <div class="" style="max-width:80%">
+            <p  style="min-height:39px" class="h6 font-weight-bold brand-color ml-1">Produtos fora de Stock:</p>
+
+
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">12<p></div>
+            
+
+            
+        </div>
+        <div style="flex: 1" class="brand-color d-flex align-items-center justify-content-center h1" ><i class="fas fa-euro-sign"></i></div>
+
+    
+    </div>
+<div class="col elem d-flex px-1 py-3">
+        <div class="" style="max-width:80%">
+            <p  style="min-height:39px" class="h6 font-weight-bold brand-color ml-1">Encomendas a Aguardar Pagamento:</p>
+
+
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">12<p></div>
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">2 estão assim há mais de dois dias<p></div>
+            
+
+            
+        </div>
+        <div style="flex: 1" class="brand-color d-flex align-items-center justify-content-center h1" ><i class="fas fa-euro-sign"></i></div>
+
+    
+    </div>
+<div class="col elem d-flex px-1 py-3">
+        <div class="" style="max-width:80%">
+            <p  style="min-height:39px" class="h6 font-weight-bold brand-color ml-1">Utilizadores:</p>
+
+
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">12<p></div>
+            <div class=" h6 ml-1 d-flex align-items-center"><i style="min-width:16px" class="fas fa-euro-sign"></i> <p class="font-weight-bold  m-0 ml-1">5 registaram-se esta semana<p></div>
+            
+
+            
+        </div>
+        <div style="flex: 1" class="brand-color d-flex align-items-center justify-content-center h1" ><i class="fas fa-euro-sign"></i></div>
+
+    
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
+

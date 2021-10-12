@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'store/stylesheets/style.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<div class="main">
+
+    <h1>Detalhes da sua encomenda</h1>
+    <p>Boa Tarde,{{order.user.first_name}} o pagamento da encomenda Nº{{order.id}} foi confirmado, enviaremos o mais rápido possivél.</p>
+    <h4>Obrigado pela preferencia</h4>
+</div>

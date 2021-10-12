@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+    
+<div class="main px-3">
+    <form  class="form" enctype="multipart/form-data" action="" method="post" >
+    {% csrf_token %}
+    {{form|crispy}}
+    {{ form.media }}
+    {{form_images.management_form}}
+    
+    
+    {% for image in form_images %}
+    <div class="my-5 images">
+    {{image|crispy}}
+    
+    </div>
+    {% endfor %}
+
+    <div id="selectors-image" class="form-group ">
+    <label>Adicionar Imagens Secundárias</label>
+
+    <div class="input-group ">
+    <a class="d-none mr-2 brand-color h5 btn-img-remove"><i class="far fa-trash-alt"></i></a>
+    <input name="images" class="insert-image clearablefileinput "type='file'>
+    </div>
+    </div>
+    {% for category in categories%}
+         <div class="form-group " >
+    <label>Categorias</label>
+
+    <div id="categories-dropdown">
+    <select class="custom-select my-1 mr-sm-2 categories-drop form-control " data-depth="0" id="category0">
+                <option value="-1">Selecione a Categoria</option>
+              {%for category in category%}
+              <option value="{{category.pk}}">{{ category}}</option>
+              {%endfor%}
+    </select>
+    
+   
+    </div>
+    </div>
+      
+    {% endfor %}
+    </form>
+<button id="btn-submit" class="btn btn-main">Editar</button>
+</div>
+
+<script>
+
+
+
+
+
+
+
+$('.images input:checkbox').change(
+    function(){
+      parent=$(this).parents('.images');
+      id=parent.find('input:hidden').val()
+
+      console.log(id)
+      url="{% url 'ajax-delete-image' %}"
+
+      $.ajax({                       
+      url:url,
+      
+      data: {
+        'pk':id,
+      },
+      success: function (data) {
+        parent.remove()
+
+        
+
+        var total_forms=$('#id_images-TOTAL_FORMS').val()
+        total_forms=Number(total_forms)
+        total_forms--
+        console.log(total_forms)
+        $('#id_images-TOTAL_FORMS').val(total_forms)
+      },
+      
+    });
+    });
+
+
+
+
+  $(".delete-image").click(function() {
+      let div=$(this).parent();
+      console.log($(this))
+      this1=$(this)
+      div.children("#id_is_deleted").attr("value","True")
+      console.log(div.children("#id_is_deleted"))
+    div.css('display','none')
+
+  });
+
+
+    $("#btn-submit").click(function() {
+        $(".form").submit()
+
+  });
+
+
+function tinyBug() {
+  const el =tinymce.editors ;
+  console.log(el)
+  console.log(el.lengh)
+
+  if (el.length) {
+    
+      tinymce.remove('textarea');
+      tinymce.init({
+  selector: '#id_detail',  // change this value according to your HTML
+  
+});
+
+  } else {
+    setTimeout(tinyBug, 100); // try again in 300 milliseconds
+  }
+}
+
+
+
+$( document ).ready(function() {
+   tinyBug() 
+  if($("#id_images-INITIAL_FORMS").val()=="0"){
+    $(".images").remove();
+
+  }
+});
+$(document).on('change', 'input[type="file"].insert-image', function(){    
+let parent=$(this).parent();
+parent.find('a').removeClass("d-none")
+
+$(this).addClass("visuallyhidden");
+var filename = $(this).val().split('\\').pop();
+
+
+parent.append('<p>'+filename+'<p>');
+ console.log("inserted");
+      $("#selectors-image").append('<div class="input-group "><a class="d-none mr-2 brand-color h5 btn-img-remove"><i class="far fa-trash-alt"></i></a> <input name="images" class="insert-image clearablefileinput "type="file"></div>');
+     
+});
+
+
+$(document).on('click', '.btn-img-remove', function(){
+
+    let parent=$(this).parent();
+    parent.remove();
+    console.log(parent)
+
+
+
+});
+</script>
+{% endblock content %}

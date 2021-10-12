@@ -1,0 +1,67 @@
+{% load static %}
+<style>
+
+</style>
+
+
+{% comment %} <div class="product mb-3 pt-3 pb-3" data-url="{% url 'product' product.pk %}"> {% endcomment %}
+<div class="product1 mb-3 pt-3 pb-3" data-url="{% url 'product' product.pk %}">
+
+
+
+
+
+
+                {% if product.highlighted and product.new %}
+                         <div class="destaque_novidade">
+                        
+                         <img class="d-block" src="{% static 'store/images/icons/novidade_destacado.svg' %}" style="position:absolute;max-width:250px" alt="First slide">
+        </div>
+
+
+                 {% elif product.highlighted  and product.new is False %} 
+                         <div class="destaque">
+
+                         <img class="d-block" src="{% static 'store/images/icons/destacado.svg' %}" style="position:absolute;max-width:250px" alt="First slide">
+        </div>
+
+
+                 {% elif product.highlighted is False and product.new  %} 
+                         <div class="destaque">
+                        
+                         <img class="d-block" src="{% static 'store/images/icons/novidade.svg' %}" style="position:absolute;max-width:250px" alt="First slide">
+
+        </div>
+                
+                {% endif%}
+
+
+
+        <div style="height:300px;overflow: hidden;"class="d-flex justify-content-center align-items-center">
+        {% if product.main_image %}
+
+        
+        <img class="d-block " src="{{product.main_image.url}}" style="border-radius:10px" alt="First slide">
+        
+        {% else %}
+        <img src=" {% static 'store/images/6_pny-geforce-rtx-3060-revel-single-fan-gr.jpg' %}" >
+        
+        {% endif%}
+        </div>
+        <h1 class="mt-2 pb-5">{{product.name}}</h1>
+        <h2 class="mt-2">{{product.description}} </h2>
+        <p class="price">{{product.price}} €</p>
+
+        
+        
+
+        {% if product.stock > 0 %}
+        <p class="aval font-weight-bold "><i class="fas fa-check-square"></i> Entrega prevista em 2 dias úteis</p>
+
+        {% else %}
+        <p class="aval font-weight-bold" style="color:#bd2130;"><i class="far fa-times-circle"></i> Indisponível</p>
+
+        {% endif%}
+
+
+</div>
