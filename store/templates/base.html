@@ -4,16 +4,17 @@
 
 <html>
 <head>
-    <title>My Project</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'store/stylesheets/style.css' %}">
+  <title>Albiclick</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'store/images/logo.png' %}"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'store/stylesheets/style.css' %}">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -23,24 +24,24 @@
 </head>
 
 <style>
-    .teste {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
+  .teste {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
 
-{% comment %} .teste::after {
-  content: "";
-  flex: auto;
-  
-}
+  {% comment %} .teste::after {
+    content: "";
+    flex: auto;
+    
+  }
 
-.teste:last-child {
-  margin-left:50px;
-} {% endcomment %}
+  .teste:last-child {
+    margin-left:50px;
+    } {% endcomment %}
 
 
-</style>
+  </style>
 
 
 
@@ -54,7 +55,7 @@
 
 
 
-    <body id="body">
+  <body id="body">
 
 
 
@@ -62,132 +63,132 @@
 
 
 
-      {% if messages%}
-      {%for message in messages%}
+    {% if messages%}
+    {%for message in messages%}
 
-      {% if message.tags == 'danger' %}
+    {% if message.tags == 'danger' %}
 
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="error_modalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-light" id="error_modalLabel">Aconteceu algo inesperado!</h5>
-        
-          
-       
-      </div>
-      <div class="modal-body">
-        {{message}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script>
-    $(document).ready(function() {
-    $('#error_modal').modal('show')
-
-});
-
-  </script>
-
-
-
-      {% endif %}
-
-
-
-
-
-
-
-      {%endfor%}
-      {% endif %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Carrinho de Compras</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Deseja confirmar o carrinho de compras?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-main btn-secondary" data-dismiss="modal">Fechar</button>
-        <a href="{% url 'checkout' %}" type="button" class="btn btn-main">Confirmar</a>
+    <!-- Modal -->
+    <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="error_modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title text-light" id="error_modalLabel">Aconteceu algo inesperado!</h5>
+            
+            
+            
+          </div>
+          <div class="modal-body">
+            {{message}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+            
+          </div>
+        </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+      $(document).ready(function() {
+        $('#error_modal').modal('show')
+
+      });
+
+    </script>
+
+
+
+    {% endif %}
+
+
+
+
+
+
+
+    {%endfor%}
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Carrinho de Compras</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Deseja confirmar o carrinho de compras?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-main btn-secondary" data-dismiss="modal">Fechar</button>
+            <a href="{% url 'checkout' %}" type="button" class="btn btn-main">Confirmar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="overlay-cart" class="menu">
+      {% include "./cart/main.html" %}
+
+
+      
+
+    </div>
+
+
+
+
   </div>
-</div>
-
-
-
-
-
-
-
-
-
-<div id="overlay-cart" class="menu">
-{% include "./cart/main.html" %}
-
-
-        
-
-</div>
-
-
-
-
-</div>
-<div style="" class="overlay-categories menu">
- 
- <img class="btn-close left" src=" {% static 'store/images/icons/close.svg' %}"alt="logo" style=" margin-left:15px; "> 
-  <a href="{% url 'index'%}">
-  <img src=" {% static 'store/images/logo.png' %}"alt="logo" class="ml-5"style=" width:180px">
-   </a>
+  <div style="" class="overlay-categories menu">
+   
+   <img class="btn-close left" src=" {% static 'store/images/icons/close.svg' %}"alt="logo" style=" margin-left:15px; "> 
+   <a href="{% url 'index'%}">
+    <img src=" {% static 'store/images/logo.png' %}"alt="logo" class="ml-5"style=" width:180px">
+  </a>
   <h1 class="h2 mb-4 ml-5">Categorias</h1>
 
 
@@ -196,37 +197,37 @@
  <img class="btn-close white" src=" {% static 'store/images/icons/close.svg' %}"alt="logo" style=" margin-left:15px; "> 
  <div class="header">
   <h1 class="h2">Bem vindo!</h1>
-{% if user.is_authenticated %}
+  {% if user.is_authenticated %}
 
   <h3 class="h5">{{ user.first_name }}</h3>
-    <a href="{% url 'logout' %}"style="">Terminar Sessão</a>
-
-    </div>
-
-<div class="container">
-    
-
-{% else %}
-
-  <h3 class="h5">Registe-se agora e começa a comprar ainda hoje!</h3>
-<a href="{% url 'register'%}"style="">Criar uma conta Albiclick</a>
+  <a href="{% url 'logout' %}"style="">Terminar Sessão</a>
 
 </div>
 
 <div class="container">
-    
-    <a href="{% url 'login'%}"class="h2"> Iniciar Sessão</a>
-    <hr >
-
-
-{% endif%}
   
-    <a href="{% url 'dashboard'%}"class"h1">A minha conta</a>
-    <a href="{% url 'dashboard-args' x=4%}" class"h1">Informações da conta</a>
-    <a href="{% url 'dashboard-args' x=3%}" class"h1">As minhas moradas</a>
-    <a class"h1">Favoritos</a>
-    <a href="{% url 'dashboard-args' x=2%}" class"h1">As minhas encomendas</a>
-    <a class"h1">Subscrição Newsletter</a>
+
+  {% else %}
+
+  <h3 class="h5">Registe-se agora e começa a comprar ainda hoje!</h3>
+  <a href="{% url 'register'%}"style="">Criar uma conta Albiclick</a>
+
+</div>
+
+<div class="container">
+  
+  <a href="{% url 'login'%}"class="h2"> Iniciar Sessão</a>
+  <hr >
+
+
+  {% endif%}
+  
+  <a href="{% url 'dashboard'%}"class"h1">A minha conta</a>
+  <a href="{% url 'dashboard-args' x=4%}" class"h1">Informações da conta</a>
+  <a href="{% url 'dashboard-args' x=3%}" class"h1">As minhas moradas</a>
+  <a class"h1">Favoritos</a>
+  <a href="{% url 'dashboard-args' x=2%}" class"h1">As minhas encomendas</a>
+  <a class"h1">Subscrição Newsletter</a>
 
 
 
@@ -244,36 +245,36 @@
 
 
 <div class="main ">
-    
+  
 
 
 
   <div id="storebar-resp" class="py-3 pr-3 w-100 pb-5 navbar ">
-      <div class="row justify-content-between align-items-center">
+    <div class="row justify-content-between align-items-center">
 
-  <a style="width: 50%;" href="{% url 'index'%}">
+      <a style="width: 50%;" href="{% url 'index'%}">
         <img src=" {% static 'store/images/logo.png' %}"alt="logo" class="" style="width: 100%;"> 
-   </a>
+      </a>
 
 
-          <div class=" buttons-wrapper">
-                <a id=""><i class="menu-users-btn fas fa-user"></i></a>
-                <a><i class="fas fa-star"></i></a>
-                <a id=""><i class="menu-cart-btn fas fa-shopping-cart"></i></a>
-                <a id=""> <i class="menu-categories-btn fas fa-bars"></i> </a>
+      <div class=" buttons-wrapper">
+        <a id=""><i class="menu-users-btn fas fa-user"></i></a>
+        <a><i class="fas fa-star"></i></a>
+        <a id=""><i class="menu-cart-btn fas fa-shopping-cart"></i></a>
+        <a id=""> <i class="menu-categories-btn fas fa-bars"></i> </a>
 
-
-          </div>
 
       </div>
-        <div class="search mt-4">
-            <form action= {% url 'see-products' %} method="GET" class="w-100">
-            <div class="search-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" name="search" placeholder="Pesquise toda a loja aqui">
-            </div>
-            </form>
+
+    </div>
+    <div class="search mt-4">
+      <form action= {% url 'see-products' %} method="GET" class="w-100">
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" name="search" placeholder="Pesquise toda a loja aqui">
         </div>
+      </form>
+    </div>
 
   </div>
 
@@ -282,127 +283,107 @@
 
 
 
-    <div id="storebar" class="">
-        <div class="left">
+  <div id="storebar" class="">
+    <div class="left">
 
-            <a id=""> <i class="menu-categories-btn fas fa-bars"></i> </a>
+      <a id=""> <i class="menu-categories-btn fas fa-bars"></i> </a>
 
-        
-          <a href="{% url 'index'%}">
-            <img src=" {% static 'store/images/logo.png' %}"alt="logo" style=" margin-left:15px; width:180px"> 
-   </a>
-
-        </div>
-        <div class="search">
-            <form action= {% url 'see-products' %} method="GET">
-            <div class="search-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" name="search" placeholder="Pesquise toda a loja aqui">
-            </div>
-            </form>
-        </div>
-
-        <div class="right">
-            <div class="buttons-wrapper">
-                <a id=""><i class="fas fa-user menu-users-btn"></i></a>
-                <a><i class="fas fa-star"></i></a>
-                <a id=""><i class="menu-cart-btn fas fa-shopping-cart"></i></a>
-            </div>
-        </div>
-
+      
+      <a href="{% url 'index'%}">
+        <img src=" {% static 'store/images/logo.png' %}"alt="logo" style=" margin-left:15px; width:180px"> 
+      </a>
 
     </div>
-            <div class="banner" id="message-display">
-        {% if messages%}
-        {%for message in messages%}
-
-        {% if message.tags != "danger"%}
-        
-
-
-
-        <div class="mb-0 alert alert-{{ message.tags}}">
-          {{message}}
+    <div class="search">
+      <form action= {% url 'see-products' %} method="GET">
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" name="search" placeholder="Pesquise toda a loja aqui">
         </div>
-        {% endif %}
+      </form>
+    </div>
 
-        {%endfor%}
-        {% endif %}
-        </div>
-</div>
-
-        {% block content %}
-
-        
-        {% endblock content %}
-</div>
-        <div class="main p-5" style="background-color:white"></div>
-        <div class=" main "id="footer">
-
-            <hr style=" margin: auto;width:500px" class="hr mt-2">
-            
-  <div class="color-primary">
-    <div class="container">
-
-      <!-- Grid row-->
-      <div class="row py-4 d-flex align-items-center">
-
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-          <h6 class="mb-0">Get connected with us on social networks!</h6>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-          <!-- Facebook -->
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f white-text mr-4"> </i>
-          </a>
-          <!-- Twitter -->
-          <a class="tw-ic">
-            <i class="fab fa-twitter white-text mr-4"> </i>
-          </a>
-          <!-- Google +-->
-          <a class="gplus-ic">
-            <i class="fab fa-google-plus-g white-text mr-4"> </i>
-          </a>
-          <!--Linkedin -->
-          <a class="li-ic">
-            <i class="fab fa-linkedin-in white-text mr-4"> </i>
-          </a>
-          <!--Instagram-->
-          <a class="ins-ic">
-            <i class="fab fa-instagram white-text"> </i>
-          </a>
-
-        </div>
-        <!-- Grid column -->
-
+    <div class="right">
+      <div class="buttons-wrapper">
+        <a id=""><i class="fas fa-user menu-users-btn"></i></a>
+        <a><i class="fas fa-star"></i></a>
+        <a id=""><i class="menu-cart-btn fas fa-shopping-cart"></i></a>
       </div>
-      <!-- Grid row-->
-
     </div>
-  </div>
 
+
+  </div>
+  <div class="banner" id="message-display">
+    {% if messages%}
+    {%for message in messages%}
+
+    {% if message.tags != "danger"%}
+    
+
+
+
+    <div class="mb-0 alert alert-{{ message.tags}}">
+      {{message}}
+    </div>
+    {% endif %}
+
+    {%endfor%}
+    {% endif %}
+  </div>
+</div>
+
+{% block content %}
+
+
+{% endblock content %}
+</div>
+<div class="main p-5" style="background-color:white"></div>
+<div class=" main "id="footer">
+
+  <hr style=" margin: auto;width:500px" class="hr mt-2">
+  
+  
   <!-- Footer Links -->
-  <div class="container text-center text-md-left pt-4 pt-md-5">
+  <div class=" text-center text-md-left pt-4 pt-md-5">
 
     <!-- Grid row -->
     <div class="row mt-1 mt-md-0 mb-4 mb-md-0">
 
       <!-- Grid column -->
-      <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+      <div class="col-md-12 col-lg-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4 text-center">
 
         <!-- Links -->
-        <h5>About me</h5>
-        <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+        
 
-        <p class="foot-desc mb-0">Here you can use rows and columns to organize your footer content. Lorem
-          ipsum dolor sit amet,
-          consectetur
-          adipisicing elit.</p>
+        <img class="logo"src=" {% static 'store/images/logo.png' %}"alt="logo" > 
+        <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+        <div class="social mt-3">
+
+          <!-- Facebook -->
+
+
+          <a class="">
+            <img src=" {% static 'store/images/icons/fb.svg' %}"alt="logo" style=""> 
+
+          </a>
+          
+          <!-- Twitter -->
+          <a class="mx-3">
+            <img src=" {% static 'store/images/icons/tw.svg' %}"alt="logo" style=""> 
+
+          </a>
+
+          <!--Instagram-->
+          <a class="">
+            <img src=" {% static 'store/images/icons/ig.svg' %}"alt="logo" style=""> 
+
+          </a>
+
+        </div>
+        <div class="w-100">
+        <img src=" {% static 'store/images/icons/payments.svg' %}"alt="logo" class="view-desktop mx-auto" style="margin-top: 100px; max-width:200px"> 
+</div>
+
 
       </div>
       <!-- Grid column -->
@@ -410,25 +391,23 @@
       <hr class="clearfix w-100 d-md-none">
 
       <!-- Grid column -->
-      <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+      <div class="view-desktop col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
 
         <!-- Links -->
-        <h5>Products</h5>
-        <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+        <h5 class="brand-color pb-2" >Produtos</h5>
+        
 
         <ul class="list-unstyled foot-desc">
           <li class="mb-2">
-            <a href="#!">MDBootstrap</a>
+            <a class="nostyle" href="#!">Destaques</a>
           </li>
           <li class="mb-2">
-            <a href="#!">MDWordPress</a>
+            <a class="nostyle" href="#!">Novidades</a>
           </li>
           <li class="mb-2">
-            <a href="#!">BrandFlow</a>
+            <a class="nostyle" href="#!">Ver todos</a>
           </li>
-          <li class="mb-2">
-            <a href="#!">Bootstrap Angular</a>
-          </li>
+
         </ul>
 
       </div>
@@ -437,25 +416,23 @@
       <hr class="clearfix w-100 d-md-none">
 
       <!-- Grid column -->
-      <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+      <div class="view-desktop  col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
 
         <!-- Links -->
-        <h5>Useful links</h5>
-        <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+        <h5 class="brand-color pb-2" >Informações</h5>
+        
 
         <ul class="list-unstyled foot-desc">
           <li class="mb-2">
-            <a href="#!">Your Account</a>
+            <a class="nostyle" href="#!">Área de Cliente</a>
           </li>
           <li class="mb-2">
-            <a href="#!">Become an Affiliate</a>
+            <a class="nostyle" href="#!">Termos/ Política de Privacidade</a>
           </li>
           <li class="mb-2">
-            <a href="#!">Shipping Rates</a>
+            <a class="nostyle" href="#!">Métodos de Envio</a>
           </li>
-          <li class="mb-2">
-            <a href="#!">Help</a>
-          </li>
+
         </ul>
 
       </div>
@@ -464,18 +441,18 @@
       <hr class="clearfix w-100 d-md-none">
 
       <!-- Grid column -->
-      <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+      <div class="view-desktop  col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
 
         <!-- Links -->
-        <h5>Contacts</h5>
-        <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+        <h5 class="pb-2 brand-color">Contactos</h5>
+        
 
         <ul class="fa-ul foot-desc ml-4">
-          <li class="mb-2"><span class="fa-li"><i class="far fa-map"></i></span>New York, Avenue Street 10
+          <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>New York, Avenue Street 10
           </li>
-          <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt"></i></span>042 876 836 908</li>
-          <li class="mb-2"><span class="fa-li"><i class="far fa-envelope"></i></span>company@example.com</li>
-          <li><span class="fa-li"><i class="far fa-clock"></i></span>Monday - Friday: 10-17</li>
+          <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>042 876 836 908</li>
+          <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>company@example.com</li>
+          <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Monday - Friday: 10-17</li>
         </ul>
 
       </div>
@@ -483,245 +460,295 @@
 
     </div>
     <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
+    <div id="accordion" class="bg-gray view-mobile">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0 ">
+            <button class="btn btn-link brand-color" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Produtos
+            </button>
+          </h5>
         </div>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-  <script>
 
-{% if request.session.cart%}
-var has_cart=true;
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <ul class="list-unstyled foot-desc pl-4 pt-3">
+            <li class="mb-2">
+              <a class="nostyle" href="#!">Destaques</a>
+            </li>
+            <li class="mb-2">
+              <a class="nostyle" href="#!">Novidades</a>
+            </li>
+            <li class="mb-2">
+              <a class="nostyle" href="#!">Ver todos</a>
+            </li>
 
-{% else%}
-var has_cart=false;
-{% endif%}
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0 brand-color">
+            <button class="btn btn-link collapsed brand-color" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Informações
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+         <ul class="list-unstyled foot-desc pl-4 pt-3">
+          <li class="mb-2">
+            <a class="nostyle" href="#!">Área de Cliente</a>
+          </li>
+          <li class="mb-2">
+            <a class="nostyle" href="#!">Termos/ Política de Privacidade</a>
+          </li>
+          <li class="mb-2">
+            <a class="nostyle" href="#!">Métodos de Envio</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0 brand-color">
+          <button class="btn btn-link collapsed brand-color" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Contactos
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+       <ul class="fa-ul foot-desc pl-1 pt-3">
+        <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>New York, Avenue Street 10
+        </li>
+        <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>042 876 836 908</li>
+        <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>company@example.com</li>
+        <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Monday - Friday: 10-17</li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+</div>
+        <img src=" {% static 'store/images/icons/payments.svg' %}"alt="logo" class="view-mobile" style="margin-top: 100px; max-width:400px"> 
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">© 2021 Copyright:
+  <a href="https://mdbootstrap.com/"> albiclickstore.pt</a>
+</div>
+<!-- Copyright -->
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+
+  {% if request.session.cart%}
+  var has_cart=true;
+
+  {% else%}
+  var has_cart=false;
+  {% endif%}
 
 
-var cart_flag=false;
+  var cart_flag=false;
 
 
-console.log(has_cart);
-
-
-
-
-function createGray2() {
-$( "body" ).append('<div class="gray2"></div>');
-$( "body" ).addClass('modal-open');
-
-
-}
+  console.log(has_cart);
 
 
 
 
-function createGray() {
-$( "body" ).append('<div class="gray"></div>');
-$( "body" ).addClass('modal-open');
+  function createGray2() {
+    $( "body" ).append('<div class="gray2"></div>');
+    $( "body" ).addClass('modal-open');
 
 
-}
-function removeGray() {
-$(".gray").remove();
-$(".gray2").remove();
-
-$(body).removeClass("modal-open")
-
-
-
-}
-
-$(document).on('click', '.gray', function(){
-  removeGray();
-  $(".menu").hide()
-});
-
-$(document).on('click', '.gray2', function(){
-  removeGray();
-  $(".menu2").hide()
-});
-
-
-$(".menu-users-btn").click(function() {
-  createGray();
-  console.log("clcik");
-  $("#overlay-users").css('display', 'block');
-
-
-});
-
-
-$(document).on('click', '.btn-close', function(){    
-
-
-  console.log("clcik");
-  $(this).parent().css('display', 'none');
-  $(".error").remove();
-  removeGray();
-});
-
-var flag_categories=false;
+  }
 
 
 
 
-$(".menu-categories-btn").click(function() {
+  function createGray() {
+    $( "body" ).append('<div class="gray"></div>');
+    $( "body" ).addClass('modal-open');
+
+
+  }
+  function removeGray() {
+    $(".gray").remove();
+    $(".gray2").remove();
+
+    $(body).removeClass("modal-open")
+
+
+
+  }
+
+  $(document).on('click', '.gray', function(){
+    removeGray();
+    $(".menu").hide()
+  });
+
+  $(document).on('click', '.gray2', function(){
+    removeGray();
+    $(".menu2").hide()
+  });
+
+
+  $(".menu-users-btn").click(function() {
+    createGray();
+    console.log("clcik");
+    $("#overlay-users").css('display', 'block');
+
+
+  });
+
+
+  $(document).on('click', '.btn-close', function(){    
+
+
+    console.log("clcik");
+    $(this).parent().css('display', 'none');
+    $(".error").remove();
+    removeGray();
+  });
+
+  var flag_categories=false;
+
+
+
+
+  $(".menu-categories-btn").click(function() {
     createGray();
     if(flag_categories===false){
 
-        $.ajax({                       
-            url:"{% url 'ajax-load-categories-menu' %}",
-                            
-            data: {
-                
-            },
-            success: function (data) {
-                console.log(data)
-                $(".overlay-categories").append(data)
-                flag_categories=true
-            },
-            
-        });
-    }
- 
-  $(".overlay-categories").css('display', 'block');
-
-
-
-});
-
-
-
-$(".menu-cart-btn").click(function() {
-  createGray();
-  
-  console.log("clcik");
-
-if(has_cart===true && cart_flag==false){
-    console.log("ajax request")
       $.ajax({                       
-        url:"{% url 'ajax-get-cart' %}",
-                        
+        url:"{% url 'ajax-load-categories-menu' %}",
+        
         data: {
-            
+          
         },
         success: function (data) {
-            cart_flag=true;
-            renderCart(data);
-       
+          console.log(data)
+          $(".overlay-categories").append(data)
+          flag_categories=true
         },
         
-    });
-
-
-}
-
-
-  $("#overlay-cart").css('display', 'block');
+      });
+    }
+    
+    $(".overlay-categories").css('display', 'block');
 
 
 
-});
-function renderCart(data) {
+  });
+
+
+
+  $(".menu-cart-btn").click(function() {
+    createGray();
+    
+    console.log("clcik");
+
+    if(has_cart===true && cart_flag==false){
+      console.log("ajax request")
+      $.ajax({                       
+        url:"{% url 'ajax-get-cart' %}",
+        
+        data: {
+          
+        },
+        success: function (data) {
+          cart_flag=true;
+          renderCart(data);
+          
+        },
+        
+      });
+
+
+    }
+
+
+    $("#overlay-cart").css('display', 'block');
+
+
+
+  });
+  function renderCart(data) {
     let overlay_cart=$('#overlay-cart');
-   
+    
     overlay_cart.empty();
     overlay_cart.append(data);
 
-}
+  }
 
 
 
 
-$(".btn-cart-remove-item").click(function() {
-    url=$(this).data("url");
-    console.log($(this).data("url"));
 
-    $.ajax({                       
-        url:url,
-                        
-        data: {
-            
-        },
-        success: function (data) {
-            renderCart(data);
-       
-        },
-        
-    });
-
-});
-
-
-$(document).on('click', '#btn-cart-clean', function(){
+  $(document).on('click touchstart', '#btn-cart-clean', function(){
 
     console.log("From cart-clena");
 
     $.ajax({                       
-        url:" {% url 'ajax-clean-cart' %}",
-                        
-        data: {
-            
-        },
-        success: function (data) {
-            console.log("From cart-clena");
-            let overlay_cart=$('#overlay-cart');
-            overlay_cart.empty();
-            overlay_cart.append(data);
-            overlay_cart.css('display', 'block');
-            
+      url:" {% url 'ajax-clean-cart' %}",
+      
+      data: {
         
-        },
+      },
+      success: function (data) {
+        console.log("From cart-clena");
+        let overlay_cart=$('#overlay-cart');
+        overlay_cart.empty();
+        overlay_cart.append(data);
+        overlay_cart.css('display', 'block');
         
+        
+      },
+      
     });
 
-});
+  });
 
 
-$(document).on({
+  $(document).on({
     mouseenter: function () {
-    $( this ).addClass( "hover" );
-    console.log()
-    
-    $( this ).find('h1').addClass('hover')
+      $( this ).addClass( "hover" );
+      console.log()
+      
+      $( this ).find('h1').addClass('hover')
 
         //stuff to do on mouse enter
-    },
-    mouseleave: function () {
-    $( this ).removeClass( "hover" );
-    $( this ).find('h1').removeClass('hover')
+      },
+      mouseleave: function () {
+        $( this ).removeClass( "hover" );
+        $( this ).find('h1').removeClass('hover')
 
 
         //stuff to do on mouse leave
-    }
-},'.product1');
+      }
+    },'.product1');
   
 
-$(document).on('click', '.product1', function(){    
+  $(document).on('click', '.product1', function(){    
     let url=$(this).data("url");
     console.log(url)
     location.href=url;
 
-});
+  });
 
 
 
 
 
-  </script>
-  
-  
-  </body>
-    </body>
-    </html>
+</script>
+
+
+</body>
+</body>
+</html>

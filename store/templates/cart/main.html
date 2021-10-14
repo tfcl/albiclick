@@ -151,7 +151,7 @@ $(".btn-cart-update").click(function() {
     });
 });
 
-$(".btn-cart-remove-item").click(function() {
+$(".btn-cart-remove-item").on('click touchstart', function() {
     url=$(this).data("url");
     console.log($(this).data("url"));
 

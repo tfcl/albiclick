@@ -21,7 +21,7 @@
 
 <div class="main pb-5">
 
-<div class="d-flex px-3">
+<div style="overflow: hidden;" class="d-flex px-3">
 
 <a href="{% url 'index' %}" class="mr-1 nostyle">Home</a>
 <p class="mr-1">><p>
@@ -208,7 +208,7 @@
 
 
   $("#btn-add-cart").click(function() {
-
+    createGray();
 
     $.ajax({                       
       url:" {% url 'ajax-add-cart' product.pk %}",

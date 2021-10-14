@@ -3,7 +3,23 @@ body#body{
   background-color: #e8e8e8;
 }
 
+#btn-cart-clean{
+  cursor: pointer;
+}
 
+
+.images-index{
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 250px;
+}
+
+.images-index-container h1{
+  background-color: #ffffffab;
+  padding: 0px 5px 10px 5px;
+}
 a.nostyle:hover {
 
   font-weight: bold;
@@ -118,6 +134,25 @@ align-items: center;
 
 
  @media only screen and (min-device-width : 320px) and (max-device-width : 811px) {
+
+
+body .collapse ul{
+  font-size: 35px;
+} 
+
+body .card-header h5 button{
+  font-size: 40px;
+  
+}
+  .images-index{
+    margin-top: 80px;
+    margin-left: 0;
+    margin-right: 0;
+
+    height: 350px;
+  }
+
+
   .register{
     max-width: 80%;
   }
@@ -192,6 +227,11 @@ body .form-check-label{
 
 @media only screen and (min-width: 600px)  {  
  
+  #footer .logo{
+
+    max-width: 500px;
+  }
+
   body .view-mobile {
 
   display: block;   
@@ -406,7 +446,9 @@ display: none;
   }
 
   
-
+  .social img{
+    max-width:90px
+  }
  }
  
 
@@ -435,6 +477,16 @@ display: none;
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width:1000px) {
+
+  .social img{
+    max-width:40px
+  }
+
+  #footer .logo{
+
+    max-width: 200px;
+  }
+
   .register{
     max-width: 500px;
   }
@@ -1008,7 +1060,7 @@ z-index: 100;
 
     #footer{
       padding-top: 5px;
-      height: 400px;
+      
       background-color: #F5F4F5;
 
     }
