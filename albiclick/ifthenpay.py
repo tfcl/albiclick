@@ -2,7 +2,7 @@
 import requests
 import json
 
-
+import time
 
 
 def payshop(id,valor):
@@ -35,67 +35,70 @@ def payshop(id,valor):
 
 def mbway(id,valor,tel,email):
 
-    URL = "http://mbway.ifthenpay.com/ifthenpaymbw.asmx/SetPedidoJSON"
-    
-    # location given here
-    apiKey = "RBJ-924465"
-    
-    # defining a params dict for the parameters to be sent to the API
-    PARAMS = {'MbWayKey':apiKey,
-                'referencia':"500",
-               'canal':"03",
-               'valor':valor,
-               'nrtlm':tel,
-               'email':email,
-                'descricao':id,
-            
-    
-    }
-    #print(PARAMS)
-    # sending get request and saving the response as response object
-    r = requests.get(url = URL, params = PARAMS)
-    
-    # extracting data in json format
-    # data = r.json()
-    response=json.loads(r.text)
-    
-    return response
+     URL = "http://mbway.ifthenpay.com/ifthenpaymbw.asmx/SetPedidoJSON"
+
+     # location given here
+     apiKey = "RBJ-924465"
+
+     # defining a params dict for the parameters to be sent to the API
+     PARAMS = {'MbWayKey':apiKey,
+                    'referencia':"500",
+                    'canal':"03",
+                    'valor':valor,
+                    'nrtlm':tel,
+                    'email':email,
+                    'descricao':id,
+               
+
+     }
+     #print(PARAMS)
+     # sending get request and saving the response as response object
+     r = requests.get(url = URL, params = PARAMS)
+
+     # extracting data in json format
+     # data = r.json()
+     response=json.loads(r.text)
+
+     return response
 def verifyMbway(id):
-    
-    URL = "http://mbway.ifthenpay.com/ifthenpaymbw.asmx/EstadoPedidosJSON"
-    
-    # location given here
-    apiKey = "RBJ-924465"
-    
-    # defining a params dict for the parameters to be sent to the API
-    PARAMS = {'MbWayKey':apiKey,
-                
-               'canal':"03",
-               'idspagamento':id
+
+     URL = "http://mbway.ifthenpay.com/ifthenpaymbw.asmx/EstadoPedidosJSON"
+
+     # location given here
+     apiKey = "RBJ-924465"
+
+     # defining a params dict for the parameters to be sent to the API
+     PARAMS = {'MbWayKey':apiKey,
+                    
+                    'canal':"03",
+                    'idspagamento':id
+                    
+                    
                
-               
-            
-    
-    }
-    #print(PARAMS)
-    # sending get request and saving the response as response object
-    r = requests.get(url = URL, params = PARAMS)
-    
-    # extracting data in json format
-    # data = r.json()
-    response=json.loads(r.text)
 
-    response=response["EstadoPedidos"]
-    print(response)
-    response=response[0]
-    print(response)
+     }
+     #print(PARAMS)
+     # sending get request and saving the response as response object
+     r = requests.get(url = URL, params = PARAMS)
+
+     # extracting data in json format
+     # data = r.json()
+     response=json.loads(r.text)
+
+     response=response["EstadoPedidos"]
+     print(response)
+     response=response[0]
+     print(response)
+
+#or response["Estado"]=="123"
+     if response["Estado"]=="000"  :
+          return True
 
 
-    if response["Estado"]=="000" or response["Estado"]=="123" :
-        return True
-
-    else:
-        return False
+     elif response["Estado"]=="123":
+          return -1     
+     else:
+          return False
 
     #print(response)
     
@@ -156,3 +159,6 @@ def generateMbRef( order_id, order_value ):
    #print("Valor: %s" % order_value)
 
    return data
+#response=mbway("dgfgdfg","20","965105224","fdsg@hjgk.com")
+#time.sleep(3)
+#print(verifyMbway("FzMgqBdSeVnLrQZD40J3"))

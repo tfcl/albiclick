@@ -20,6 +20,11 @@ from . import views
 
 urlpatterns = [
 
+
+    path('terms', views.terms, name='terms'),
+    path('policies', views.policies, name='policies'),
+
+
     path('', views.index.as_view(), name='index'),
     path('product/<int:pk>/', views.product_view, name='product'),
 

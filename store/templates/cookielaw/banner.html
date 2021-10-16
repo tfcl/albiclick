@@ -1,0 +1,28 @@
+{% load i18n static %}
+<script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+
+
+<div class="w-100" id="CookielawBannerWrapper"> 
+<div  id="CookielawBanner">
+<div class="cookie-content">
+    <div class="cookie-text">
+        <h3 class="h3 pb-2">Politica de Dados</h3>
+        <p>As cookies deste web site são utilizadas para a personalização de conteúdos e anúncios, assim como para oferecer funcionalidades de redes sociais e análise de tráfego. As informações sobre a utilização deste web site são partilhadas com os nossos parceiros de redes sociais, de publicidade e análise.</p>
+    </div>
+    <div class="cookie-buttons align-middle">
+         {% comment %} <a class="btn-blue" href="{% url 'legal_advice' %}">{% trans "What are the cookies?" %}</a> {% endcomment %}
+         <a class="btn btn-main m-0 " href="javascript:Cookielaw.createCookielawCookie();">Percebi</a>
+         <a href="{% url "policies"%}" class="nostyle align-middle ml-2 ">Ler mais</a>
+    </div>
+    <div class="close-cookies"></div>
+</div>
+</div>
+</div>
+
+<script type="application/javascript">
+$(document).ready(function () {
+   $('.close-cookies').click(function () {
+       $(this).parent().hide();
+   });
+});
+</script>

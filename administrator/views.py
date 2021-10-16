@@ -11,7 +11,7 @@ import json
 from django.db.models import Count, F, Subquery, Sum,OuterRef
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+from albiclick.queries import get_products
 
 def check_admin(view):
     def wrapper(request, user=None):
@@ -85,10 +85,7 @@ class ProductListView(CheckAdminMixin ,ListView):
 
     def get_queryset(self):
         
-        queryset=Product.objects.annotate(
-            num_sells=Subquery(CartItem.objects.filter(
-                cart__in=Cart.objects.filter(id__in=list(Order.objects.all().values_list('cart', flat=True)))).filter(
-                    product=OuterRef('id')).values("product_id").annotate(sum_of_sells=Sum('quantity')).values('sum_of_sells')))
+        queryset=get_products()
         
         json_raw=self.request.GET.get('json',None)
 

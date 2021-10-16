@@ -176,10 +176,13 @@ $("#id_postal_code").on("input", function() {
 
 
          else{
-            window.location.replace("{% url 'dashboard-args' 3 %}");
+            {% comment %} window.location.replace("{% url 'dashboard-args' 3 %}"); {% endcomment %}
             $('#adressModal ').modal('hide');
-           $("#checkout-adresses").empty()
-           $("#checkout-adresses").append(data)
+
+            $(".adress").empty()
+           $(".adress").append(data)
+           {% comment %} $("#checkout-adresses").empty()
+           $("#checkout-adresses").append(data) {% endcomment %}
            $('.modal-backdrop').remove()
            $('body').removeClass("modal-open")
            flag_sucess=false

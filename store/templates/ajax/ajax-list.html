@@ -264,19 +264,9 @@ $( ".page-link" ).each(function() {
 
 
 
-$( document ).ready(function() {
-  var cut_index=56
-    var arr_titles=$(".product1").find("h1");
-    
-      console.log(arr_titles)
-    arr_titles.each(function() {
-      if($(this).text().length>cut_index){
 
-        console.log("é maiore")
-        var temp_title=$(this).text().slice(0,cut_index-3)
-        $(this).text(temp_title+"...")
-      }
-});
+$( document ).ready(function() {
+  cut_titles()
 });
 </script>
 

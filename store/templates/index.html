@@ -229,40 +229,35 @@ $('#carousel-products').on('prev', function () {
 
 
 
-<h1 class="h1 mt-5">Promoções</h1>
+<h1 class="h1 mt-5">Produtos</h1>
 <hr class="hr"align="left">
 
 <div class="d-lg-flex ">
   <div class="img-container mb-5"style="">
     <img  src=" {% static 'store/images/promotion.jpg' %}" style="width:100%">
   </div>
-  <div class="d-flex pl-4  products">
-    {% for product in promotions %}
+  <div class="d-flex   first-row products  w-lg-50 mx-auto">
+    {% for product in products|slice:":2" %}
     <div class="lg-ml-2">
       {% include "products/product-thumb.html" with product=product  %}
     </div>
     {% endfor %}
   </div>
 </div>
-
-
-
-
-<h1 class="h1 mt-5 ">Produtos</h1>
-<hr class="hr "align="left">
-<div class="products mt-5 d-flex">
+<div class="products fill mt-5 d-flex mx-auto" style="max-width:1470px">
   
 
-  {% for product in products %}
+  {% for product in products|slice:"2:" %}
   {% include "products/product-thumb.html" with product=product  %}
 
   {% endfor %}
   
 
 </div>
-<div class="text-center ">
-  <div class="btn btn-main align-middle">Ver Produtos</div>
+<div class="text-center my-5 pb-5">
+  <a href="{% url "see-products"%}" class="btn btn-main align-middle">Ver Produtos</a>
 </div>
+
 
 
 
@@ -411,21 +406,35 @@ $('#carousel-products').on('prev', function () {
       }
     }
 
-
+  fill_products()
   });
-  $( document ).ready(function() {
-    var cut_index=56
-    var arr_titles=$(".product1").find("h1");
-    
-    console.log(arr_titles)
-    arr_titles.each(function() {
-      if($(this).text().length>cut_index){
 
-        console.log("é maiore")
-        var temp_title=$(this).text().slice(0,cut_index-3)
-        $(this).text(temp_title+"...")
-      }
-    });
+  function fill_products(){
+    
+    
+    if(window.outerWidth > 811) {
+    let products=$(".fill .product1")
+    let n=$(".fill .product1").length
+    n=n%4
+    width=$(".fill .product1").width()
+    
+
+    while(n<4){
+      $(".fill").append("<div class='product-hidden'></div>")
+      n++
+
+    }
+                
+                }
+
+
+
+
+  }
+
+  $( document ).ready(function() {
+
+     cut_titles()
   });
 </script>
 

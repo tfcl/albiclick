@@ -8,7 +8,7 @@ from django.contrib.sessions.backends.db import SessionStore
 
 from django.contrib.sessions.models import Session
 from django.core.mail import EmailMessage
-
+from albiclick.ifthenpay import verifyMbway
 app = Celery('tasks', broker='redis://localhost')
 
 @app.task
@@ -49,6 +49,9 @@ def update_stock(cart):
 
     return "Tsete"
 
+@app.task
+def task_verifymbway(id):
+    return verifyMbway(id)
 
 # @app.task
 # def send_mail(subject, html_message, from_email,at):

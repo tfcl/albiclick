@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'administrator',
     'crispy_forms',
     'tinymce',
+    'cookielaw',
 
     #importante para os signalss
     'albiclick.apps.AlbiclickAppConfig'
@@ -189,7 +190,7 @@ MESSAGE_TAGS = {
 #celery
 CELERY_CACHE_BACKEND = 'default'
 CELERY_BROKER_URL = 'redis://localhost'
-
+CELERY_RESULT_BACKEND='redis://'
 
 #Tinymce html field
 

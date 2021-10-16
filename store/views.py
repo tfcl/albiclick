@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls.conf import path
 
 from django.views.generic import TemplateView
+from administrator.views import products
 from products.models import Product
 from .models import Cart, CartItem
 from products.models import Category
@@ -16,11 +17,24 @@ from itertools import chain
 from django.db.models import Avg, Max, Min
 from django.core import serializers
 from django.contrib.postgres.search import TrigramSimilarity
+from albiclick.queries import get_products
+
+
+def policies(request):
+    return render(request,'policies.html')
+
+
+
+def terms(request):
+    return render(request,'terms.html')
+
+
+
 class index(TemplateView):
 
  
     template_name='index.html'
-
+    main_queryset=get_products()
 
     def get_context_data(self, **kwargs):
         #print(self.request.session.get('is_checking',None))
@@ -31,37 +45,38 @@ class index(TemplateView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of the first 16 elements always a multiple of four
-        context['products'] = Product.objects.all()[:16]
+        
 
         #Novidades
         #procurar os produtos novidade --- a rever
-        novidades_queryset=Product.objects.all()
+        
         #Incializar array
-        novidades=Product.objects.filter(new=True)
-        destaques=Product.objects.filter(highlighted=True)
-
-
+        novidades=self.main_queryset.filter(new=True)[:8]
+        destaques=self.main_queryset.filter(highlighted=True)
+        destaques=destaques.exclude(pk__in=novidades)[:8]
+        top_sells=self.main_queryset.order_by("num_sells")[:8]
         #Separar num array em grupos de 5 para renderizar no carrousel
 
-       
+        products=self.main_queryset.exclude(pk__in=novidades).exclude(pk__in=destaques)[:20]
 
         ##print(novidades)
         #print("123")
         #update ao contexto
         context['novidades']=novidades
         context['destaques']=destaques
-
+        context["top_sells"]=top_sells
+        context["products"]=products
         #promoções
 
              #procurar os promoções --- a rever
-        promotions=Product.objects.all()
+        
        
 
 
         #Separar num array em grupos de 5 para renderizar no carrousel 
         #update do contexto
 
-        context['promotions']=promotions[:3]
+        
 
 
         #print(context['products'])

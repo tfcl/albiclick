@@ -88,8 +88,8 @@
 
 $(document).on('click', '#mbway-btn', function(){    
 $(".invalid-feedback").remove()
-
-if($("#mbway-input").val().length<9){
+let val=$("#mbway-input").val()
+if(/^(9[1236]\d) ?(\d{3}) ?(\d{3})$/.test(val)===false){
     $("#mbway-input").addClass("is-invalid")
     
     $("#mbway-input").after('<p id="" class="invalid-feedback"><strong>Verifique o seu contacto e tente outra vez.</strong></p>')

@@ -11,7 +11,7 @@ from store.models import Cart
 from .models import Order, Shipment, Payment, Detail
 from users.models import Adress
 
-from .tasks import update_stock
+from .tasks import update_stock, task_verifymbway
 from django.contrib import messages
 
 
@@ -22,7 +22,7 @@ from albiclick.ifthenpay import payshop,mbway,verifyMbway,generateMbRef
 
 import time
 from django.urls import reverse
-
+from albiclick.celery import app
 
 
 
@@ -87,7 +87,7 @@ def checkout(request):
 
     if 'checkout' not in request.session:
         
-        update_stock.apply_async(args=(cart.pk,), countdown=3000)
+        #update_stock.apply_async(args=(cart.pk,), countdown=3000)
 
         for item in cart_items:
             stock=item.product.stock-item.quantity
@@ -176,19 +176,23 @@ def payment(request):
 
             idPedido=data["IdPedido"]
             print(f"idPedidoo!!!!!!!!!!!!{idPedido}")
+            
+            # ver_output=ver.get()
+            # print(ver_output)
+            # while(True):
+            #     time.sleep(5)
+            #     flag=verifyMbway(idPedido)
+            #     print(flag)
+            #     if flag != -1:
+            #         break
 
 
-            time.sleep(5)
-    
-
-
-            flag=verifyMbway(idPedido)
 
             
 
-            if flag == False:
-                order.delete()
-                return HttpResponse("-1")
+            # if flag == False:
+            #     order.delete()
+            #     return HttpResponse("-1")
 
 
 

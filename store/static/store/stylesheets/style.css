@@ -7,6 +7,13 @@ body#body{
   cursor: pointer;
 }
 
+.path{
+
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
 
 .images-index{
   background-size: cover;
@@ -41,7 +48,7 @@ a.nostyle:visited {
 /* nav bar */
 #storebar{
     color: #80173b;
-    background-color: F5F4F5;
+    background-color: white;
     display: flex;
     padding: 20px 0px;
 
@@ -134,7 +141,9 @@ align-items: center;
 
 
  @media only screen and (min-device-width : 320px) and (max-device-width : 811px) {
-
+  body ul{
+    font-size: 35px;
+  }
 
 body .collapse ul{
   font-size: 35px;
@@ -280,6 +289,11 @@ display: none;
     margin: auto;
   }
   .product1{
+    width: 385px;
+  }
+
+  .product-hidden{
+
     width: 385px;
   }
 
@@ -449,6 +463,19 @@ display: none;
   .social img{
     max-width:90px
   }
+
+  .first-row{
+    justify-content: space-around;
+    width: 100%;
+  }
+  body h2, body .h2{
+    font-size: 45px;
+  }
+  body h3{
+    font-size: 40px;
+  }
+
+
  }
  
 
@@ -477,7 +504,10 @@ display: none;
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width:1000px) {
-
+  .first-row{
+    justify-content: space-between!important;
+    width: 50%;
+  }
   .social img{
     max-width:40px
   }
@@ -699,6 +729,10 @@ display: none;
 
 
   .product1{
+    width: 300px;
+  }
+
+  .product-hidden{
     width: 300px;
   }
   #storebar{

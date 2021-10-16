@@ -1,5 +1,6 @@
 {% load static %}
-
+{% load cookielaw_tags%}
+{% cookielaw_banner %}
 <!DOCTYPE html>
 
 <html>
@@ -9,6 +10,7 @@
   <link rel="shortcut icon" type="image/png" href="{% static 'store/images/logo.png' %}"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'store/stylesheets/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'cookielaw/css/cookielaw.css' %}">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -399,13 +401,13 @@
 
         <ul class="list-unstyled foot-desc">
           <li class="mb-2">
-            <a class="nostyle" href="#!">Destaques</a>
+            <a class="nostyle" href="{% url "see-products-args" 'destaques'%}">Destaques</a>
           </li>
           <li class="mb-2">
-            <a class="nostyle" href="#!">Novidades</a>
+            <a class="nostyle" href="{% url "see-products-args" 'novidades'%}">Novidades</a>
           </li>
           <li class="mb-2">
-            <a class="nostyle" href="#!">Ver todos</a>
+            <a class="nostyle" href="{% url "see-products"%}">Ver todos</a>
           </li>
 
         </ul>
@@ -424,11 +426,15 @@
 
         <ul class="list-unstyled foot-desc">
           <li class="mb-2">
-            <a class="nostyle" href="#!">Área de Cliente</a>
+            <a class="nostyle" href="{% url "dashboard"%}">Área de Cliente</a>
           </li>
           <li class="mb-2">
-            <a class="nostyle" href="#!">Termos/ Política de Privacidade</a>
+            <a class="nostyle" href="{% url "terms"%}">Termos e Condições</a>
           </li>
+          <li class="mb-2">
+            <a class="nostyle" href="{% url "policies"%}">Política de Privacidade</a>
+          </li>
+
           <li class="mb-2">
             <a class="nostyle" href="#!">Métodos de Envio</a>
           </li>
@@ -448,11 +454,11 @@
         
 
         <ul class="fa-ul foot-desc ml-4">
-          <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>New York, Avenue Street 10
+          <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>Castelo Branco
           </li>
-          <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>042 876 836 908</li>
-          <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>company@example.com</li>
-          <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Monday - Friday: 10-17</li>
+          <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>(+351) 969317273</li>
+          <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>albiclick123@gmail.com</li>
+          <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Segunda-Feira - Sexta-Feira: 10-17</li>
         </ul>
 
       </div>
@@ -473,13 +479,13 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
           <ul class="list-unstyled foot-desc pl-4 pt-3">
             <li class="mb-2">
-              <a class="nostyle" href="#!">Destaques</a>
+              <a class="nostyle" href="{% url "see-products-args" 'destaques'%}">Destaques</a>
             </li>
             <li class="mb-2">
-              <a class="nostyle" href="#!">Novidades</a>
+              <a class="nostyle" href="{% url "see-products-args" 'novidades'%}">Novidades</a>
             </li>
             <li class="mb-2">
-              <a class="nostyle" href="#!">Ver todos</a>
+              <a class="nostyle" href="{% url "see-products"%}">Ver todos</a>
             </li>
 
           </ul>
@@ -496,10 +502,13 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
          <ul class="list-unstyled foot-desc pl-4 pt-3">
           <li class="mb-2">
-            <a class="nostyle" href="#!">Área de Cliente</a>
+            <a class="nostyle" href="{% url "dashboard"%}">Área de Cliente</a>
           </li>
           <li class="mb-2">
-            <a class="nostyle" href="#!">Termos/ Política de Privacidade</a>
+            <a href="{% url "terms"%}" class="nostyle">Termos e Condições</a>
+          </li>
+            <li class="mb-2">
+            <a class="nostyle" href="{% url "policies"%}">Política de Privacidade</a>
           </li>
           <li class="mb-2">
             <a class="nostyle" href="#!">Métodos de Envio</a>
@@ -518,11 +527,11 @@
       </div>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
        <ul class="fa-ul foot-desc pl-1 pt-3">
-        <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>New York, Avenue Street 10
+        <li class="mb-2"><span class="fa-li"><i class="far fa-map  brand-color"></i></span>Castelo Branco
         </li>
-        <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>042 876 836 908</li>
-        <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>company@example.com</li>
-        <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Monday - Friday: 10-17</li>
+        <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt brand-color"></i></span>(+351) 969317273</li>
+        <li class="mb-2"><span class="fa-li"><i class="far fa-envelope brand-color"></i></span>albiclick123@gmail.com</li>
+        <li><span class="fa-li"><i class="far fa-clock brand-color"></i></span>Segunda-Feira - Sexta-Feira: 10-17</li>
       </ul>
 
     </div>
@@ -546,6 +555,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
 
+function cut_titles(){
+  var cut_index=50
+    var arr_titles=$(".product1").find("h1");
+    
+      console.log(arr_titles)
+    arr_titles.each(function() {
+      if($(this).text().length>cut_index){
+
+        console.log("é maiore")
+        var temp_title=$(this).text().slice(0,cut_index-3)
+        $(this).text(temp_title+"...")
+      }
+});
+
+}
   {% if request.session.cart%}
   var has_cart=true;
 
