@@ -112,7 +112,7 @@ def checkout(request):
 
     if 'checkout' not in request.session:
         
-        #update_stock.apply_async(args=(cart.pk,), countdown=3000)
+        update_stock.apply_async(args=(cart.pk,), countdown=1200)
 
         for item in cart_items:
             stock=item.product.stock-item.quantity
