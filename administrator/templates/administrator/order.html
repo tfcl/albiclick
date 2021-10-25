@@ -20,8 +20,8 @@
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-main btn-secondary" data-dismiss="modal">Fechar</button>
-        <button data-url="{% url 'administrator-update-order' order.pk %}" type="button" id="btn-send-form" class="btn btn-main">Guardar</button>
+        <button type="button" class="btn btn-main btn-secondary my-1" data-dismiss="modal">Fechar</button>
+        <button data-url="{% url 'administrator-update-order' order.pk %}" type="button" id="btn-send-form" class="btn btn-main my-1">Guardar</button>
       </div>
     </div>
   </div>
@@ -61,8 +61,20 @@
 
     <p><span class="font-weight-bold">Encomenda Nº:</span> {{order.pk}}</p>  
     <p><span class="font-weight-bold">Data de Compra:</span> {{order.creation_date}}</p>   
-    <p><span class="font-weight-bold">Método de Envio:</span> {{ order.shipment.name}}</p>   
-    <p><span class="font-weight-bold">Anexos:</span> {{ order.shipment.name}}</p>   
+    <p><span class="font-weight-bold">Método de Envio:</span> {{ order.shipment.name}}</p>
+
+
+    <p><span class="font-weight-bold">Fatura:</span> 
+        {% if order.cupon%}
+    <p><span class="font-weight-bold">Cupão:</span> {{order.cupon.code}}</p>  
+
+
+    {% endif%}
+    
+  
+    
+    
+    </p>   
 
     </div>
     <div class="col-md-12 col-lg-6">
@@ -75,9 +87,12 @@
 
 </div>
 
-{% if order.state != "4"%}
+{% if order.state != "4" and order.state != "0" %}
+<div class="d-flex">
+        <a data-url="{% url 'administrator-update-order' order.pk %}"id="btn-update-state" data-toggle="modal" data-target="#modal-update" class="btn btn-main mr-2">Atualizar Estado</a>
+        <a class="btn btn-main ml-2"href="{% url 'administrator-cancel-order' order.pk %}">Cancelar Encomenda</a>
 
-        <a data-url="{% url 'administrator-update-order' order.pk %}"id="btn-update-state" data-toggle="modal" data-target="#modal-update" class="btn btn-main">Atualizar Estado</a>
+</div>
 {% endif%}
 
 <div class="pt-3">

@@ -1,0 +1,133 @@
+{% extends 'base-admin.html' %}
+
+
+
+{% load static %}
+
+{% block contentRight %} 
+<a href="{% url "administrator-cupons-create" %}"class=" nostyle "><span class="brand-color"><i class="fas fa-plus-square"></i></span>   Adicionar novo</a>
+
+<table class="mt-2 table table-striped">
+  <thead>
+    <tr>
+    <th scope="col-1"></th>
+      <th scope="col">Código</th>
+      <th scope="col">Desconto</th>
+      <th scope="col">Portes</th>
+      <th scope="col">Nº Usado</th>
+
+   
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for cupon in object_list %}
+      <tr >
+      <td>
+
+
+
+      {% if cupon.is_active%}
+      <i style="color:green" class="fas fa-circle"></i>
+      {% else %}
+      <i style="color:red"class=" fas fa-circle"></i>
+
+      {% endif%}
+
+
+
+      </td>
+
+      <th scope="row">{{ cupon.code}} </th>
+      <td>{{ cupon.discount }}</td>
+
+      {% if cupon.is_free_shipping%}
+      <td>Gratuito</td>
+      {% else %}
+      <td></td>
+      {% endif%}
+<td>
+    <div class="dropdown show">
+  <a class="brand-color dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   <i class="fas fa-cogs"></i>
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    
+    <a href="{% url 'administrator-cupons-update' cupon.pk %}" class="dropdown-item" href="">Editar</a>
+    
+    
+    
+  {% if cupon.is_active %}  
+    <a class="desactivate-btn" data-pk="{{cupon.pk}}" class="dropdown-item" href="#">Desactivar</a>
+  {% else %}
+    <a class="activate-btn" data-pk="{{cupon.pk}}" class="dropdown-item" href="#">Activar</a>
+  {% endif%}
+  
+  </div>
+</div>
+
+</td>
+
+
+    </tr>
+    {% endfor%}
+    
+  </tbody>
+</table>
+
+<script>
+$(document).on('click', '.activate-btn', function(){  
+  
+
+
+    id=$(this).data("pk");
+    parent=$(this).parents("tr")
+
+    url="{% url 'ajax-administrator-cupons-activate' %}"
+
+           $.ajax({                       
+      url:url,
+      
+      data: {
+        'pk':id,
+      },
+      success: function (data) {
+        window.location.replace("{% url 'administrator-cupons'%}");
+        
+      },
+      
+    }); 
+  });
+
+
+  $(document).on('click', '.desactivate-btn', function(){  
+  
+
+
+    id=$(this).data("pk");
+    parent=$(this).parents("tr")
+
+    url="{% url 'ajax-administrator-cupons-desactivate' %}"
+
+           $.ajax({                       
+      url:url,
+      
+      data: {
+        'pk':id,
+      },
+      success: function (data) {
+        window.location.replace("{% url 'administrator-cupons'%}");
+        
+      },
+      
+    }); 
+  });
+</script>
+
+
+
+
+
+{% endblock %}
+

@@ -299,7 +299,9 @@ function tinyBug() {
       tinymce.remove('textarea');
       tinymce.init({
   selector: '#id_detail',  // change this value according to your HTML
-  
+  invalid_elements: "span",
+  invalid_styles: "background-color",
+  paste_as_text: true,
 });
 
   } else {

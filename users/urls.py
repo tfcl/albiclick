@@ -4,7 +4,7 @@ from django.urls import path,re_path
 from django.contrib.auth import views as auth_views
 from django.views.generic import edit
 from users.forms import UserLoginForm, ChandPasswordForm
-from .views import login_view,logout_view,register,dashboard,ajax_my_orders,ajax_account,ajax_edit_account,ajax_adresses,edit_adress
+from .views import ajax_delete_adress_billing, login_view,logout_view,register,dashboard,ajax_my_orders,ajax_account,ajax_edit_account,ajax_adresses,edit_adress
 urlpatterns = [
   
     url('login/',login_view, name='login'),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('ajax/my-adresses/',ajax_adresses, name='ajax-get-my-adresses'),
     path('ajax/edit-account/', ajax_edit_account, name='ajax-edit-account'),
     #edit
+    path('ajax/delete-adress-billing/', ajax_delete_adress_billing, name='ajax-delete-adress-billing'),
 
     path('edit-adress/', edit_adress, name=''),
     path('edit-adress/<int:pk>/', edit_adress, name='edit-adress-args'),

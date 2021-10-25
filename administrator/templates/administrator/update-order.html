@@ -23,7 +23,7 @@
 
 <h5 class="h6">Adicione a fatura e o traking number se pretender.</h5>
 {% endif%}
-<form class="mt-3" id="form-update"method="POST">
+<form class="mt-3" id="form-update"method="POST" enctype="multipart/form-data">
 
 {% csrf_token %}
     {{form|crispy}}

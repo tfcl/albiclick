@@ -5,3 +5,4 @@ class AlbiclickAppConfig(AppConfig):
 
     def ready(self):
         import orders.signals
+        import users.signals

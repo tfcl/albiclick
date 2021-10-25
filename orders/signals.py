@@ -7,6 +7,9 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMessage
 import mimetypes
+
+from store.models import Cart, CartItem
+
 def send_emails(sender,instance, **kwargs):
     print(f"kwargs:{kwargs}")
     print(f"kwargs:{kwargs['update_fields']}")
@@ -85,6 +88,27 @@ def send_emails(sender,instance, **kwargs):
 
 
                 email.send()
+
+
+            elif state=="0":
+                print("Estado=Cancelado")
+                cart=Cart.objects.get(pk=instance.cart.pk)
+                items=cart.items.all()
+
+
+                for item in items:
+
+                    stock=item.product.stock+item.quantity
+                    item.product.stock=stock
+                    item.product.save()
+                
+                subject = 'Encomenda Albiclick - Cancelada'
+                html_message = render_to_string('email/0.html', {'order': instance})
+                plain_message = strip_tags(html_message)
+                from_email = 'Albiclick'
+                to = instance.user.email
+                
+                mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 post_save.connect(send_emails, sender=Order,dispatch_uid="send_emails")
 
 

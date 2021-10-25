@@ -9,13 +9,15 @@
 <h2 class="pb-4 brand-color">Método de Envio e Pagamentos</h2>
 
 <h1 class="h2 font-weight-bold mb-4 ">Método de Envio</h1>
-<p class="" >Escolha o método de Envio:</p>
+<hr style="border-top:2px solid rgba(0,0,0,.1); border-radius:25px" >
 
+<p class="" >Escolha o método de Envio:</p>
+<div class="mb-5">
 
 {% for shipment in shipments%}
 
 
-<div data-url="{% url 'checkout-payment-get-total' shipment.pk %}" data-pk="{{shipment.pk}}"class="px-2 row justify-content-between mx-0 sender mb-4" style=" ">
+<div data-url="" data-pk="{{shipment.pk}}"class="px-2 row justify-content-between mx-0 sender mb-4" style=" ">
 <p class="my-2 first">{{shipment.name}}</p>
 <p class="my-2" >{{shipment.price}} €</p>
 </div>
@@ -23,8 +25,34 @@
 
 {% endfor%}
 
+</div>
+<div class="payment blocked" >
+<h1 class="h2 font-weight-bold my-4 ">Cupão</h1>
+
+
+<hr style="border-top:2px solid rgba(0,0,0,.1); border-radius:25px" >
+
+<div id="cupon-div" class="form-group ">
+<p>Código do Cupão:</p>
+
+
+
+
+
+
+<input class="w-100 form-control "type="text" name="cupon-input" class="">
+
+<div class="center-sm">
+<button id ="cupon-btn"class="btn btn-main" value="">Adicionar Cupão </button>
+</div>
+
+
+</div>
+</div>
 <div  class="payment blocked" >
 <h1 class="h2 font-weight-bold my-4 ">Método de Pagamento</h1>
+<hr style="border-top:2px solid rgba(0,0,0,.1); border-radius:25px" >
+
 <p class="font-weight-bold brand-color " >Total: <span id="payment-total" style="color:black;">Escolha um método de Envio</span> </p>
 <p class="" >Escolha o método de pagamento:</p>
 
@@ -67,41 +95,73 @@
 </div>
 </div>
 
+    
+
+
 
 <script>
 {% comment %}  {% endcomment %}
 
 var shipment_pk
+var total
+var cupon_code
+
+
+$(document).on('click', '#cupon-btn', function(){
+    $('input[name="cupon-input"]').removeClass("is-invalid")
+    $('.invalid-feedback').remove()
+
+    if ($('input[name="cupon-input"]').val()!==""){
+
+        let flag=ajax_get_total()
+        if (flag===false){
+            $('input[name="cupon-input"]').addClass("is-invalid")
+            $('input[name="cupon-input"]').after("<p class='invalid-feedback d-block font-weight-bold'>Verifique o código do Cupão</p>")               
+
+        }
+        else{
+            cupon_code=flag.cupon
+            $("#cupon-div").empty();
+            $("#cupon-div").append('<input type="hidden" value="'+flag.cupon+'" name="cupon-input">')
+
+            $("#cupon-div").append('<p class="font-weight-bold">Código do Cupão: <span class=" brand-color ">'+flag.cupon+'</span></p>')
+            $("#cupon-div").append('<p class="font-weight-bold">Parabéns! Este cupão garante:<p>')
+            $("#cupon-div").append('<p  class="brand-color font-weight-bold ml-2 ">- '+flag.discount+'% de desconto na sua compra<p>')
+            if(flag.free_shipment===true){
+                $("#cupon-div").append('<p class="brand-color font-weight-bold ml-2">- Oferta de portes<p>')
+
+            }
+
+        }
+
+    }
+    else{
+            $('input[name="cupon-input"]').addClass("is-invalid")
+            $('input[name="cupon-input"]').after("<p class='invalid-feedback d-block font-weight-bold'>Verifique o código do Cupão</p>") 
+    }
+    
+});
 
 $(document).on('click', '.order-submit', function(){
 
     console.log("click");
+    $('input[name="cupon-code"]').val(cupon_code)
+
     $("[name='shipment']").val(shipment_pk);
     $(".form").submit()
 });
 
-
 $(".sender").click(function() {
     $(".sender").removeClass("selected") ;
     $(this).addClass("selected")
-    shipment_pk=$(this).data("pk")
-    url=$(this).data("url")
-   
-     $.ajax({                       
-        url:url,
-                        
-        data: {
-            
-        },
-        success: function (data) {
-            console.log(data);
-            let dataJSON=JSON.parse(data);
-            $("#payment-total").text(dataJSON.total)
-            $(".payment").removeClass("blocked") ;
-            
-        },
-        
-    });
+    let flag=ajax_get_total()
+
+    if (flag===true){
+        $(".payment").removeClass("blocked") ;
+
+
+    }
+
 
     });
 
@@ -128,7 +188,45 @@ $(".payment input[name='method']").click(function() {
 
     });
 
+function ajax_get_total(){
+    console.log("ajax_get_total")
+    var success
+    let shipment ;
+    let cupon;
+    shipment=$(".sender.selected").data("pk")
+    cupon=$('input[name="cupon-input"]').val()
+    shipment_pk=shipment
+    $.ajax({                       
+        url:"{% url 'checkout-payment-get-total'%}",
+        async: false,               
+        data: {
+            "cupon":cupon,
+            "shipment":shipment,
+        },
+        success: function (data) {
+            let dataJSON=JSON.parse(data);
 
+            $("#payment-total").text(dataJSON.total)
+            success=true
+      
+            if (dataJSON.hasOwnProperty('cupon_error')){
+                success=false
+
+            }
+            else if(dataJSON.hasOwnProperty('cupon')){
+
+                success=dataJSON
+            }
+
+        },
+        
+    });
+
+    return success;
+    
+    console.log("--------------------------")
+
+}
 
 </script>
 {% endblock %}

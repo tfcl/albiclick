@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div style=""class="pb-5 main">
+
+
+<div class="d-flex bg-gray"  >
+    <div  class="py-3 px-0 w-100 ">
+        <h1 class="h3 " style="font-weight:600">Criar Cupão</h1>
+        <hr class="hr " align="left">
+
+    </div>
+</div>
+
+
+
+<form style=" " method="post">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+<input class="btn btn-main"type="submit" value="Guardar">
+</form>
+</div>
+{% endblock%}

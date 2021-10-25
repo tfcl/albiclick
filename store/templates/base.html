@@ -75,7 +75,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="error_modalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog warning modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header bg-danger">
             <h5 class="modal-title text-light" id="error_modalLabel">Aconteceu algo inesperado!</h5>
@@ -84,11 +84,12 @@
             
           </div>
           <div class="modal-body">
-            {{message}}
+            <p>{{message}}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
-            
+          <div class="center-sm">
+            <button type="button" class="btn btn-main btn-danger my-1" data-dismiss="modal">Ok</button>
+            </div>
           </div>
         </div>
       </div>
@@ -145,8 +146,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade  " id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog warning modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Carrinho de Compras</h5>
@@ -155,11 +156,11 @@
             </button>
           </div>
           <div class="modal-body">
-            Deseja confirmar o carrinho de compras?
+            <p>Deseja confirmar o carrinho de compras?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-main btn-secondary" data-dismiss="modal">Fechar</button>
-            <a href="{% url 'checkout' %}" type="button" class="btn btn-main">Confirmar</a>
+            <button type="button" class="btn btn-main btn-secondary my-1" data-dismiss="modal">Fechar</button>
+            <a href="{% url 'checkout' %}" type="button" class="btn btn-main my-1">Confirmar</a>
           </div>
         </div>
       </div>
@@ -189,9 +190,9 @@
    
    <img class="btn-close left" src=" {% static 'store/images/icons/close.svg' %}"alt="logo" style=" margin-left:15px; "> 
    <a href="{% url 'index'%}">
-    <img src=" {% static 'store/images/logo.png' %}"alt="logo" class="ml-5"style=" width:180px">
+    <img src=" {% static 'store/images/logo.png' %}"alt="logo" class="ml-5 logo">
   </a>
-  <h1 class="h2 mb-4 ml-5">Categorias</h1>
+  <h1 class="h2 mb-4 ml-5 brand-color">Categorias</h1>
 
 
 </div>

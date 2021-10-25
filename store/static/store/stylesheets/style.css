@@ -1,3 +1,6 @@
+::-moz-selection { background: #80173b; color: white; }
+::selection { background: #80173b;  color: white;}
+
 body#body{
 
   background-color: #e8e8e8;
@@ -141,6 +144,18 @@ align-items: center;
 
 
  @media only screen and (min-device-width : 320px) and (max-device-width : 811px) {
+ body .sender{
+margin: auto!important;
+margin-top: 50px!important;
+height: 100px;
+  }
+  
+body h5, body .h5{
+  font-size: 40px;
+}
+  body table{
+    font-size: 35px;
+  }
   body ul{
     font-size: 35px;
   }
@@ -171,9 +186,9 @@ body .card-header h5 button{
   #slider-range{
     font-size: 50px;
   }
-  body .form-group{
-
-    font-size: 25px;
+  body .form-group , body .form-control{
+    min-height: 52.5px;
+    font-size: 35px;
   }
   .center-sm{
     text-align: center;
@@ -234,8 +249,27 @@ body .form-check-label{
   }
  }
 
-@media only screen and (min-width: 600px)  {  
- 
+@media only screen and (min-width: 600px)  { 
+  .sender{
+    min-width:800px;
+    max-width:800px;
+  }
+  
+  .modal-dialog.warning {
+    max-width: 80%;
+  }
+  .btn-go-back{
+    position: absolute;
+    top: 32px;
+    
+    left: 0px;
+    margin-left: 15px;
+  }
+  
+  .overlay-categories .logo{
+
+    width: 350px;
+  }
   #footer .logo{
 
     max-width: 500px;
@@ -282,6 +316,7 @@ display: none;
     height: 90px;
     font-size: 40px;
     padding: 12px;
+    margin: 70px 0 60px 0;
     
   }
   .owl-stage-outer{
@@ -366,10 +401,19 @@ display: none;
     font-weight: bold;
     margin-top: 20px;
   } 
+
+  .subcategories-menu{
+    width: 700px;
+    padding: 15px 15px 15px 85px;
+    top: 150px;
+
+  }
+
   .overlay-categories{
     width: 700px;
+    padding: 15px 15px 15px 70px;
   }
-  .btn-close{
+  .btn-close , .btn-go-back{
     width: 60px;
   }
 
@@ -434,6 +478,10 @@ display: none;
 
     font-size: 50px;
   }
+  .btn-close{
+    top: 55px;
+  }
+  
   .btn-close.white{
 
     border-radius: 50px; 
@@ -504,6 +552,28 @@ display: none;
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width:1000px) {
+   
+  .sender{
+    min-width:400px;
+    max-width:400px;
+  }
+  
+  .modal-dialog.warning{
+    max-width: 498px;
+  }
+  .btn-go-back{
+    position: absolute;
+    top: 18px;
+    
+    left: 0px;
+    margin-left: 15px;
+  }
+  
+  .overlay-categories .logo{
+
+    width:180px;
+  }
+
   .first-row{
     justify-content: space-between!important;
     width: 50%;
@@ -652,17 +722,36 @@ display: none;
     width: 700px;
   }
   
-  .btn-close{
+  .btn-close , .btn-go-back{
     width: 35px;
   }
+  .btn-close{
+    top: 35px;
+  }
+  
+
+  .subcategories-menu{
+    width: 400px;
+    padding: 15px 15px 15px 50px;
+  top: 90px;
+
+  }
+
+
   .overlay-categories{
     width: 400px;
+    padding: 15px 15px 15px 30px;
   }
+
+
+
   
   .overlay-categories a{
     font-size: inherit;
   } 
-
+  .overlay-categories .h3{
+    font-size: 1.25rem;
+  } 
   .overlay-categories .h2{
     font-size: 2rem;
     font-weight: normal;
@@ -675,10 +764,11 @@ display: none;
     
   }
   .btn.btn-main{
-    width: 350px;
-    height: auto;
-    font-size: 1rem;
-    padding: .375rem .75rem;;
+    width: 300px;
+    height: 45px;
+    font-size: 1.25rem;
+    padding: .375rem .75rem;
+    margin: 30px 0 30px 0;
     
   }
   
@@ -1164,7 +1254,7 @@ z-index: 100;
 
 .gray, .gray2{
   
-  position:absolute;
+  position:fixed;
   top:0px;
   right:0px;
   bottom:0px;
@@ -1178,7 +1268,7 @@ z-index: 100;
 /* overlays */
 
 #overlay-users ,#overlay-cart{
-
+  overflow: auto;
   display: none;
   
   height: 100%;
@@ -1270,12 +1360,24 @@ z-index: 100;
 }
 
 
+.subcategories-menu{
+ 
+  display: none;
+  
+  height: 100%;
+  position: fixed;
+  background-color: white;
+  z-index: 300;
+  left: 0px;
+  overflow: auto;
+  padding-bottom: 170px;
 
+}
 
 
 .overlay-categories, #overlay-menu{
-  padding: 15px;
-  padding-left: 30px;
+  
+  overflow: auto;
   display: none;
   
   height: 100%;
@@ -1287,7 +1389,7 @@ z-index: 100;
 
 .btn-close{
   position: absolute;
-  top: 25px;
+ 
   right: 20px;
   z-index: 200;
 }
@@ -1451,8 +1553,7 @@ background-color: #9b41600a;
 
 .sender{
   align-items: center;
-  min-width:400px;
-  max-width:400px;
+
   border-radius:2px  ;
   border:solid 1px gray;
 
@@ -1469,14 +1570,14 @@ background-color: #9b41600a;
 color: #80173b;
 
 }
-
+/* 
 .payment hr{
 
  margin-right:1.5rem;
   
   background-color: #a99ba0;
   border-top: 1px solid rgba(0,0,0,.1);
-}
+} */
 
 hr.gray{
 
@@ -1748,7 +1849,7 @@ section {
 
 .trends {
     padding-top: 40px;
-    padding-bottom: 80px
+    padding-bottom: 40px
 }
 
 .bbb_overlay {

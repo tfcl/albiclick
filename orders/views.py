@@ -8,7 +8,7 @@ import json
 from django.http import JsonResponse
 
 from store.models import Cart
-from .models import Order, Shipment, Payment, Detail
+from .models import Cupon, Order, Shipment, Payment, Detail
 from users.models import Adress
 
 from .tasks import update_stock, task_verifymbway
@@ -48,13 +48,38 @@ def check_user_order(view):
 
 
 
+def calculate_total(cart,shipment,cupon=None):
+    total=cart.total()
+    if cupon:
+        total=float(total)-(float(cart.total())*(cupon.discount/100))
+        if cupon.is_free_shipping == False:
+            total=float(total)+float(shipment.price)
+            
+    else:
+      total=float(total)+float(shipment.price)  
+      
+    return format(total,".2f")
 
 
 
 
 
+def ajax_check_cupon(request):
+    cod=request.GET.get("cupon")
+    shipment_pk=request.GET.get("shipment_pk")
+    shipment=Shipment.objects.get(pk=shipment_pk)
+    cupon=Cupon.objects.get(code=cod)
+    print(f"cupao {cupon}  shipment{shipment}")
+    cart=Cart.objects.get(pk=request.session.get('cart'))
+    total=float(cart.total())-(float(cart.total())*(cupon.discount/100))
+    
 
-
+    if cupon.is_free_shipping==True:
+        pass
+    else:
+        total=total+shipment.price
+    
+    print(f"Total!!!!!!!!!!!!{total}")
 
 def check_time_out(cart,request):
     if cart.is_timed_out == True:
@@ -72,7 +97,7 @@ def check_time_out(cart,request):
 @login_required(login_url='/customer/accounts/login/')
 def checkout(request):
 
-    
+    context={}
 
     cart=Cart.objects.get(pk=request.session.get('cart'))
 
@@ -99,7 +124,11 @@ def checkout(request):
     
     request.session["checkout"]=True
     print(request.session["checkout"])
-    return render(request,'orders/checkout.html',{'cart':cart})
+    context["adress"]=request.user.profile.adress
+    context["adress_billing"]=request.user.profile.adress_billing
+    context["cart"]=cart
+    return render(request,'orders/checkout.html',context=context)
+
 
 
 def payment(request):
@@ -115,13 +144,20 @@ def payment(request):
         return render(request,'orders/checkout-payments.html',{'shipments':shipments})
 
     if request.method == "POST":
+        print(request.POST)
         shipment=Shipment.objects.get(pk=int(request.POST.get('shipment')))
-        total=cart.total()+shipment.price
+        cupon=None
+        cart=Cart.objects.get(pk=request.session.get('cart'))
+        if request.POST.get('cupon-code')!="":
+            if Cupon.objects.filter(code=request.POST.get('cupon-code')).exists():
+                cupon=Cupon.objects.get(code=request.POST.get('cupon-code'))
 
+
+        total=calculate_total(cart,shipment,cupon)
+        total=float(total)
 
         
 
-        cart=Cart.objects.get(pk=request.session.get('cart'))
         print(cart.session)
         #verificar se este save é necessario
         shipment=Shipment.objects.get(pk=int(request.POST.get('shipment')))
@@ -134,7 +170,7 @@ def payment(request):
         
 
 
-        order=Order(cart=cart, adress=adress, adress_billing=adress_billing, shipment=shipment,note=note,total=total, user=request.user,state="1")  
+        order=Order(cart=cart, adress=adress, adress_billing=adress_billing, shipment=shipment,note=note,total=total,cupon=cupon, user=request.user,state="1")  
         print(f"order!!!!!!!!!!!!!!!!{order.cart}")
         order.save()
         method=request.POST.get("payment-method")
@@ -152,8 +188,8 @@ def payment(request):
             payment=Payment(name="Multibanco")
             payment.save()
 
-            data=generateMbRef( str(order.pk), order.total )
-
+            data=generateMbRef(str(order.pk),order.total)
+            print(f"Referencia{data}")
 
             payment.detail_set.create(title="Entidade", description=data["Entidade"])
             payment.detail_set.create(title="Referencia", description=data["Referencia"])
@@ -252,16 +288,50 @@ def order_details(request,pk):
 
 
 
+def get_cupon_details(cupon):
+    cupon_dict={
+        'discount':cupon.discount,
+        'cupon':cupon.code,
 
-def ajax_get_total(request, pk):
+
+    }
+
+    if cupon.is_free_shipping==True:
+        cupon_dict['free_shipment']=True
+    else:
+        cupon_dict['free_shipment']=False
+ 
+    return cupon_dict
+
+def ajax_get_total(request):
+    print(request.GET)
     cart=Cart.objects.get(pk=request.session.get('cart'))
-    shipment=Shipment.objects.get(pk=pk)
+    total=0
+    cod=request.GET.get("cupon")
+    shipment_pk=request.GET.get("shipment")
+    shipment=Shipment.objects.get(pk=shipment_pk)
+    cupon=None
+ 
+    context={}
 
-    total=cart.total()+shipment.price
+    if cod != "" :
+        if Cupon.objects.filter(code=cod).exists():
 
-    dataJson=json.dumps({'total':str(total)+" €"})
+            cupon= Cupon.objects.get(code=cod)
+            context=get_cupon_details(cupon)
 
+        else:
   
+            context['cupon_error']=False
+
+
+   
+
+    # print(dataJson)
+    total=calculate_total(cart,shipment,cupon)
+    context['total']=str(total)+" €"
+    dataJson=json.dumps(context)
+    
     return JsonResponse(dataJson,safe=False)
 def ajax_payment_mb(request):
     return render(request,'ajax/payments/mb.html')

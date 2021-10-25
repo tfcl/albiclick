@@ -1,3 +1,6 @@
+{% load crispy_forms_tags %}
+
+
 
 <div class="modal-content">
   <div class="modal-header">
@@ -17,63 +20,9 @@
       <h2 class="h4 mb-4">{{title}}</h2>
       <form  id="form-adress"class="form" action="" method="post" >
         {% csrf_token %}
-        {{ form.receiver.errors }}
-        <div class="form-group row">
-          <label for="first-name" class="col-sm-2 col-form-label">{{name_label}}:</label>
-          <div class="col-sm-10">
-            <input id="id_receiver" type="text" value="{{ form.receiver.value }}" class="form-control" name="receiver" > 
+        {% crispy form  %}
 
-
-          </div>
-        </div>
-        {{ form.street.errors }}
-
-        <div class="form-group row">
-          <label for="first-name" class="col-sm-2 col-form-label">Morada: </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="id_street" name="street"value="{% firstof form.street.value ""  %}">
-          </div>
-        </div>
-        {{ form.complements.errors }}
-
-
-        {{ form.postal_code.errors }}
-        <div class=" form-group  row location">
-
-          <label class="col-md-2 col-lg-2 col-form-label "> Código Postal:</label>
-          <div style="" class="col-md-10 col-lg-2 form-inline">
-            <input  style="" type="text" class="form-control w-100" id="id_postal_code" name="postal_code" value="{% firstof form.postal_code.value ""  %}">
-        </div>
-        {{ form.city.errors }}
-        <label class="col-md-2 col-lg-1  col-form-label "> Localidade:</label>
-         <div  class="col-md-10 col-lg-3">
-
-          <input style="" type="text" class="form-control w-100"  id="id_city" name="city" value="{% firstof form.city.value ""  %}">
-      </div>
-      {{ form.district.errors }}
-      <label class="col-md-2 col-lg-1  col-form-label "> Distrito:</label>
-       <div  class="col-md-10 col-lg-3">
-
-        <input style="" type="text" class="form-control w-100" id="id_district" name="district" value="{% firstof form.district.value ""  %}">
-    </div>
-  </div>
-  {{ form.contact.errors }}
-
-  <div class="form-group row">
-    <label for="first-name" class="col-sm-2 col-form-label">Contacto: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="id_contact" name="contact" value="{% firstof form.contact.value ""  %}">
-    </div>
-  </div>
-
-  {{ form.nif.errors }}
-  <div class="form-group row nif-div">
-    <label for="nif" class="col-sm-2 col-form-label">NIF: </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="id_nif" name="nif" value="{% firstof form.nif.value ""  %}">
-    </div>
-  </div>
-  <div class="form-check mb-3" style="margin-left: 16.666667%">
+  <div class="form-check mb-3 ml-1" style="">
     <input type="checkbox" class="form-check-input" id="check-nif">
     <label class="form-check-label" for="check-nif">Sem NIF</label>
   </div>
@@ -137,7 +86,8 @@ $("#id_postal_code").on("input", function() {
   });
 
   $(".submit").click(function() {
-    console.log("aqui!");
+          $( ".invalid-feedback" ).remove()
+      $( "#id_nif" ).removeClass('is-invalid');
     if ($('#check-nif').is(":checked") || ( !($('#check-nif').is(":checked")) && $('#id_nif').val()!=="" ) ){
       {% comment %} $('.form').submit(); {% endcomment %}
 
@@ -160,34 +110,49 @@ $("#id_postal_code").on("input", function() {
 
 
         success: function (data) {
-          $("#adressModal .modal-dialog ").empty()
-          $("#adressModal .modal-dialog").addClass("d-none")
-          $("#adressModal .modal-dialog ").append(data);
+           $("#temp").append(data)
+
+          console.log(data)
+          //$("#adressModal .modal-dialog").addClass("d-none")
 
           //
-          console.log(flag_sucess)
+      
+          console.log("debug aquiiiiiiii")
+         
           if(flag_sucess===false){
-          $("#adressModal .modal-dialog").removeClass("d-none")
+          $("#adressModal .modal-dialog ").empty()
+          $("#adressModal .modal-dialog ").append(data);
+          ////$("#adressModal .modal-dialog").removeClass("d-none")
 
            console.log("false!!!!!!!!!!!!!!!!!!!")
+           $("#temp").empty()
            
-
+//
          }
 
-
+//
          else{
-            {% comment %} window.location.replace("{% url 'dashboard-args' 3 %}"); {% endcomment %}
-            $('#adressModal ').modal('hide');
-
-            $(".adress").empty()
+           console.log("treu!!!!!!!!!!!!!!!!!!!")
+             $('.modal-backdrop').remove()
+          $('body').removeClass("modal-open")
+          $(".adress").empty()
+             
            $(".adress").append(data)
-           {% comment %} $("#checkout-adresses").empty()
-           $("#checkout-adresses").append(data) {% endcomment %}
-           $('.modal-backdrop').remove()
-           $('body').removeClass("modal-open")
+            //{% comment %} window.location.replace("{% url 'dashboard-args' 3 %}"); {% endcomment %}
+            //$('#adressModal ').modal('hide');
+
+            //$(".adress").empty()
+             
+           //$(".adress").append(data)
+
+           //$('.modal-backdrop').remove()
+           //$('body').removeClass("modal-open")
+           $("#temp").empty()
+
            flag_sucess=false
 
-         } 
+         }  
+         
 
        }
 
@@ -200,7 +165,8 @@ $("#id_postal_code").on("input", function() {
     }
 
     else{
-      $( ".nif-div" ).before( "<div class='errorlist'>Se não quiser Nif assinale ,Sem Nif </div>" );
+      $( "#div_id_nif" ).append( "<p class='invalid-feedback d-block ml-0'>Se não quiser Nif assinale ,Sem Nif </p>" );
+      $( "#id_nif" ).addClass('is-invalid');
 
     }
 

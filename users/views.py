@@ -4,13 +4,16 @@ from orders.views import checkout
 from users.models import Profile
 from django.contrib.auth import login
 from django.http import request
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import authenticate, login,logout
 from .forms import UserLoginForm,CustomUserCreationForm,CheckAdress,UserNameForm
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
 from django.contrib.sessions.models import Session
 from django.contrib import messages
+
+
+
 # Create your views here.
 def login_view(request):
     form=UserLoginForm()
@@ -129,9 +132,11 @@ def ajax_my_orders(request):
 
 def ajax_adresses(request):
     print("ajax, ajax_account")
+    context={}
+    context["adress"]=request.user.profile.adress
+    context["adress_billing"]=request.user.profile.adress_billing
 
-
-    return render(request, 'ajax/adresses.html')
+    return render(request, 'ajax/adresses.html',context=context)
 
 def ajax_edit_account(request):
     user=request.user
@@ -152,6 +157,19 @@ def ajax_edit_account(request):
 
 
     return render(request, 'ajax/edit-account.html',{"form":form})
+
+
+
+def ajax_delete_adress_billing(request):
+    context={}
+    profile=request.user.profile
+    profile.adress_billing=None
+    profile.save()
+    context["adress"]=profile.adress
+    context["adress_billing"]=profile.adress_billing
+    return render(request, 'ajax/adresses.html',context=context)
+
+    
 
 #edit 
 
@@ -200,35 +218,55 @@ def edit_adress(request,type=None):
 
     
     elif request.method == "POST":
-        form=CheckAdress(request.POST)
-        
-        
-        
-        if form.is_valid():
-            adress=form.save(commit=False)
-            profile=Profile.objects.get(user=request.user)
-            
-            if type=='normal':
-                profile.adress=adress
-            elif type=='billing':   
-                profile.adress_billing=adress
-                
-            
-            adress.save()
-            profile.save()
-            # print(adress.instance.street)
-            print("sucersso from form adress")
+        context={}
+        if type=='normal':
+            user_adress=request.user.profile.adress
+        elif type=='billing':   
+            user_adress=request.user.profile.adress_billing
 
-            return render(request, 'ajax/adresses.html',{'flag_sucess':True})
-            # if request.session.get('is_checking',None):
-            #     del request.session['is_checking']
-            
-            #     return redirect('checkout')
-            # else:
-            #     return redirect("dashboard-args",3)
-
+        if user_adress:
+            form=CheckAdress(request.POST,initial={"receiver":user_adress.receiver,"street":user_adress.street,"postal_code":user_adress.postal_code,"city":user_adress.city,"district":user_adress.district,"contact":user_adress.contact,"nif":user_adress.nif})
         else:
-            
-            return render(request, 'users/edit-adress.html',{'form':form , 'type':type})
+            form=CheckAdress(request.POST)
+        if form.has_changed():
+            if form.is_valid():
+                adress=form.save(commit=False)
+                profile=Profile.objects.get(user=request.user)
+                
+                
+                
+                if type=='normal':
+                    profile.adress=adress
+                elif type=='billing':   
+                    profile.adress_billing=adress
+                    
+                
+                adress.save()
 
+                if type=='normal':
+                    profile.save(update_fields=['adress',])
+                elif type=='billing':   
+                    profile.save(update_fields=['adress_billing',])
+
+                # print(adress.instance.street)
+                print("sucersso from form adress")
+                context["adress"]=profile.adress
+                context["adress_billing"]=profile.adress_billing
+                context['flag_sucess']=True
+                return render(request, 'ajax/adresses.html',context=context)
+                # if request.session.get('is_checking',None):
+                #     del request.session['is_checking']
+                
+                #     return redirect('checkout')
+                # else:
+                #     return redirect("dashboard-args",3)
+
+            else:
+                
+                return render(request, 'users/edit-adress.html',{'form':form , 'type':type})
+        else:
+            context["adress"]=request.user.profile.adress
+            context["adress_billing"]=request.user.profile.adress_billing
+            context['flag_sucess']=True
+            return render(request, 'ajax/adresses.html',context=context)
         

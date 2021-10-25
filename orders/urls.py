@@ -17,9 +17,9 @@ urlpatterns = [
     path('ajax/payment/payshop', views.ajax_payment_payshop, name='checkout-payment-payshop'),
 
 
-    path('ajax/payment/get_total/<int:pk>/', views.ajax_get_total, name='checkout-payment-get-total'),
-    path('ajax/get_unread', views.ajax_get_unread, name='ajax-get-unread')
+    path('ajax/payment/get_total', views.ajax_get_total, name='checkout-payment-get-total'),
+    path('ajax/get_unread', views.ajax_get_unread, name='ajax-get-unread'),
 
-
+    path('ajax/cupons/verify',views.ajax_check_cupon,name='orders-cupons-check'),
 
 ]

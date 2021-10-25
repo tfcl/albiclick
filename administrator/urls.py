@@ -31,6 +31,7 @@ urlpatterns = [
 
 
     path('order/<int:pk>',views.order,name='administrator-order'),
+    path('cancel-order/<int:pk>',views.cancel_order,name='administrator-cancel-order'),
 
     #ajax
     path('ajax/orders/', views.OrderListView.as_view(), name='ajax-administrator-orders'),
@@ -45,5 +46,14 @@ urlpatterns = [
     path('shipments/update/<int:pk>',views.update_shipment,name='administrator-shipments-update'),
     path('ajax/shipments/delete',views.ajax_delete_shipment,name='ajax-administrator-shipments-delete'),
 
+
+    #cupoes
+    path('cupons/',views.CuponsListView.as_view(),name='administrator-cupons'),
+    path('cupons/update/<int:pk>',views.update_cupon,name='administrator-cupons-update'),
+
+    path('cupons/create',views.create_cupon,name='administrator-cupons-create'),
+    path('ajax/cupons/activate',views.ajax_activate_cupon,name='ajax-administrator-cupons-activate'),
+    path('ajax/cupons/desactivate',views.ajax_desactivate_cupon,name='ajax-administrator-cupons-desactivate'),
+    
 
 ]

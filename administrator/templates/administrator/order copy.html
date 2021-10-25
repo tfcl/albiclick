@@ -1,11 +1,43 @@
-{% extends 'users/dashboard.html' %}
+{% extends 'base-admin.html' %}
 
 
 
 {% load static %}
 
 {% block contentRight %} 
+
+
+<div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-update-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold" id="modal-update-label">Está prester a alterar o estado para:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-main btn-secondary" data-dismiss="modal">Fechar</button>
+        <button data-url="{% url 'administrator-update-order' order.pk %}" type="button" id="btn-send-form" class="btn btn-main">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 <div class="main px-4 pb-5 ">
+
+
 
 <h1 class="h1 mb-4  mt-3">Detalhes da Encomenda</h1>
 <h2 class="h4 pb-2 font-weight-bold brand-color mb-4">Estado da encomenda: <br><span class="" style="color:black">{{order.get_state_display}}</span></h2>
@@ -30,26 +62,26 @@
     <p><span class="font-weight-bold">Encomenda Nº:</span> {{order.pk}}</p>  
     <p><span class="font-weight-bold">Data de Compra:</span> {{order.creation_date}}</p>   
     <p><span class="font-weight-bold">Método de Envio:</span> {{ order.shipment.name}}</p>   
+    <p><span class="font-weight-bold">Anexos:</span> {{ order.shipment.name}}</p>   
 
     </div>
     <div class="col-md-12 col-lg-6">
     <p><span class="font-weight-bold">Valor:</span> {{order.total}} €</p>  
-    <p><span class="font-weight-bold">Notas:</span> {{order.note}}</p> 
-
-
-
-    {% if order.cupon%}
-    <p><span class="font-weight-bold">Cupão:</span> {{order.cupon.code}}</p>  
-
-
-    {% endif%}
-
-
+    <p><span class="font-weight-bold">Notas:</span> {{order.note}}</p>  
+    <p><span class="font-weight-bold">Utilizador:</span> <a  href="#">{{order.user.email}}</a></p>  
 
     <p></p>   
     </div>
 
 </div>
+
+{% if order.state != "4" and order.state != "0" %}
+<div class="d-flex">
+        <a data-url="{% url 'administrator-update-order' order.pk %}"id="btn-update-state" data-toggle="modal" data-target="#modal-update" class="btn btn-main mr-2">Atualizar Estado</a>
+        <a class="btn btn-main ml-2"href="{% url 'administrator-cancel-order' order.pk %}">Cancelar Encomenda</a>
+
+</div>
+{% endif%}
 
 <div class="pt-3">
 
@@ -97,38 +129,12 @@
             <tbody>
                 <tr class="h6">
                     <th class="text-right   brand-color">Sub-total:</th>
-
-
-                    {% if order.cupon.discount > 0%}
-                    <th><s>{{ order.cart.total }} €</s>  <span class="brand-color">{{ order.sub_total }} €</span></th>
-
-
-                    {% else%}
                     <th>{{ order.cart.total }} €</th>
-
-                    {% endif%}
-
-
-
 
                 </tr>
                                 <tr class="h6">
                     <th  class="text-right  brand-color">Portes:</th>
-
-                    {% if order.cupon.is_free_shipping %}
-                    <th><s>{{ order.shipment.price }} €</s>  <span class="brand-color"> 0,00  €</span></th>
-
-
-                    {% else%}
                     <th>{{  order.shipment.price }} €</th>
-                    {% endif%}
-
-
-
-
-
-
-
                 </tr>
                                 <tr class="h6">
                      <th class="text-right brand-color">Total:</th>
@@ -177,4 +183,89 @@
 
 
 </div>
+</div>
+
+<script>
+
+$(document).on('click', '#btn-send-form', function(){
+
+
+     url=$(this).data("url")
+    var formData = new FormData();
+    form=$("#form-update")
+    $( "#form-update input" ).each(function() {
+
+        console.log($(this).attr("name")+"      "+$(this).val() )
+
+
+        if($(this).attr("type")==='file' ){
+        formData.append($(this).attr("name"),$(this)[0].files[0]   );
+        console.log($(this).attr("name")+"      "+$(this)[0].files[0]  );
+        console.log("if")   
+
+        }
+        else{
+
+        formData.append($(this).attr("name"),$(this).val()   )
+        console.log("else")   
+
+        }
+
+
+
+    });
+
+            console.log(formData)
+     $.ajax({     
+
+           
+           type: 'POST',
+              url: url,
+              data: formData,
+              cache: false,
+              processData: false,
+              contentType: false,
+              enctype: 'multipart/form-data',
+            success: function (data) {
+                if (data==='1'){
+                    location.reload(); 
+
+                }
+                else{
+
+                $('#modal-update .modal-body').empty()
+                $('#modal-update .modal-body').append(data)
+
+                }
+              console.log(data);
+            },
+            
+        });
+
+
+
+ });
+
+ $( "#btn-update-state" ).click(function() {
+     url=$(this).data("url")
+
+     $.ajax({     
+
+            url:url,
+            type:"GET",           
+            data: {
+                
+                
+                
+            },
+            success: function (data) {
+                $('#modal-update .modal-body').empty()
+                $('#modal-update .modal-body').append(data)
+              console.log(data);
+            },
+            
+        });
+
+ });
+</script>
 {% endblock %}

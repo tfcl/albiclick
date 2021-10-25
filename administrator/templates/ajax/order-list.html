@@ -27,7 +27,7 @@
 
 
       <th scope="row">{{ order.get_state_display }}</th>
-      <td>{{ order.creation_date }}</td>
+      <td>{{ order.creation_date|date:'d-m-Y H:i' }}</td>
       <td>{{ order.adress.contact }}</td>
       <td>{{ order.pk }}</td>
       <td>{{ order.total }} €</td>

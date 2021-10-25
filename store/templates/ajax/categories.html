@@ -1,5 +1,56 @@
+
+
+
+{% load static %}
+
+
 {% for category in categories%}
-<a href={% url 'see-products-args' category.pk%} class="anchor mb-1 nostyle ml-5">{{category.name}}</a>
+{% comment %} <a href={% url 'see-products-args' category.pk%} class="anchor mb-1 nostyle ml-5">{{category.name}}</a> {% endcomment %}
+{% if category.childs %}
+<a data-toggle="collapse" href="#collapse-category-{{category.pk}}" role="button" aria-expanded="false" aria-controls="#collapse-category-{{category.pk}}" class="anchor mb-1 nostyle ml-5">{{category.name}}</a>
+<div class="row ml-2">
+                    <div class="col">
+                    {% comment %} <a class="btn-go-back brand-color"><i class="fas fa-arrow-left"></i></a> {% endcomment %}
+
+                        <div class="collapse subcategories-menu" id="collapse-category-{{category.pk}}">
+
+ <a style="cursor: pointer;" data-toggle="collapse" data-target="#collapse-category-{{category.pk}}"> <img class="btn-go-back" src=" {% static 'store/images/icons/previous.svg' %}"alt="logo" style="  ">  </a>
+                        <div class="">
+                            
+
+                            <a href="{% url 'see-products-args' category.pk%}" class="anchor mb-1 nostyle ml-4 h2 brand-color">{{category.name}}</a>
+
+                            {% for child in category.childs%}
+                                <a href="{% url 'see-products-args' child.pk%}" class="anchor mb-1 nostyle ml-4 pt-3 h3 ">{{child.name}}</a>
+                            {% for child1 in child.childs%}
+
+                                <a href="{% url 'see-products-args' child1.pk%}" class="anchor mb-1 nostyle ml-5">{{child1.name}}</a>
+
+                                {% endfor %}
+
+
+                                {% endfor %}
+
+
+
+
+
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% else %}
+<a href="{% url 'see-products-args' category.pk%}" class="anchor mb-1 nostyle ml-5">{{category.name}}</a>
+
+{% endif%}
+
 
 {% endfor%}
+
+
+
+
 <a href={% url 'see-products' %} class="anchor mb-1 nostyle ml-5">Ver Todos</a>

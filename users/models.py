@@ -18,6 +18,6 @@ class Adress(models.Model):
 class Profile(models.Model):
     user=models.OneToOneField(User,related_name="profile", on_delete=models.CASCADE)
     
-    adress=models.OneToOneField(Adress,related_name="adress", on_delete=models.CASCADE,null=True, blank=True)
-    adress_billing=models.OneToOneField(Adress,related_name="adress_billing", on_delete=models.CASCADE,null=True, blank=True)
+    adress=models.OneToOneField(Adress,related_name="adress", on_delete=models.DO_NOTHING,null=True, blank=True)
+    adress_billing=models.OneToOneField(Adress,related_name="adress_billing", on_delete=models.DO_NOTHING,null=True, blank=True)
 

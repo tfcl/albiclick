@@ -12,6 +12,10 @@ from django.db.models import Count, F, Subquery, Sum,OuterRef
 from django.contrib import messages
 from django.contrib.auth.models import User
 from albiclick.queries import get_products
+from orders.forms import CreateCupon
+from orders.models import Cupon
+import datetime
+from django.utils.timezone import make_aware
 
 def check_admin(view):
     def wrapper(request, user=None):
@@ -68,6 +72,61 @@ def products(request):
 
 def users(request):
     return render(request, 'administrator/users.html')
+
+def ajax_desactivate_cupon(request):
+    pk=request.GET.get("pk")
+    cupon=Cupon.objects.get(pk=pk)
+
+    if cupon.is_active:
+        cupon.is_active=False
+        cupon.save()
+    return HttpResponse()
+
+def ajax_activate_cupon(request):
+    pk=request.GET.get("pk")
+    cupon=Cupon.objects.get(pk=pk)
+
+    if not cupon.is_active:
+        cupon.is_active=True
+        cupon.save()
+    return HttpResponse()
+
+
+def update_cupon(request, pk):
+    cupon=Cupon.objects.get(pk=pk)
+    if request.method == "GET":
+        form=CreateCupon(initial={"code":cupon.code, "discount":cupon.discount,"is_free_shipping":cupon.is_free_shipping,"max_redeem":cupon.max_redeem})
+        return render(request,'cupon/create.html',{'form':form})
+            
+
+    if request.method == "POST":
+        form=CreateCupon(request.POST,instance=cupon)
+        if form.is_valid():
+            form.save()
+            return redirect("administrator-cupons")
+        else:
+            return render(request,'cupon/create.html',{'form':form})
+def create_cupon(request):
+
+
+            
+
+    
+    if request.method=='GET':
+        form=CreateCupon()
+        return render(request,'cupon/create.html',{"form":form})
+    elif request.method=='POST':
+        form=CreateCupon(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("administrator-shipments")
+        else:
+            return render(request,'cupon/create.html',{'form':form})
+       
+
+class CuponsListView(CheckAdminMixin ,ListView):
+    model=Cupon
+    template_name="cupon/cupons.html"
 
 class ShipmentsListView(CheckAdminMixin ,ListView):
     model=Shipment
@@ -179,11 +238,19 @@ class OrderListView(ListView):
                
                 print(filters['date-start'])
                 print(filters['date-end'])
+                date_start=make_aware(datetime.datetime.strptime(filters['date-start'], '%Y-%m-%d'))
+                date_end=make_aware(datetime.datetime.strptime(filters['date-end'], '%Y-%m-%d'))
 
-
-                queryset=queryset.filter(creation_date__gte=filters['date-start'],creation_date__lte=filters['date-end'])
+                print(f'Data Inicio{date_start}')
+                queryset=queryset.filter(creation_date__gte=date_start,creation_date__lte=date_end)
             elif 'date-start' in filters:
-                queryset=queryset.filter(creation_date=filters['date-start'])
+                date_start=make_aware(datetime.datetime.strptime(filters['date-start'], '%Y-%m-%d'))
+                time_change = datetime.timedelta(hours=23, minutes=59, seconds=59)
+                date_end=date_start+time_change
+                print(f'Data fim{date_end}')
+                
+                queryset=queryset.filter(creation_date__gte=date_start,creation_date__lte=date_end)
+
                 print(filters['date-start'])
 
 
@@ -244,10 +311,21 @@ def update_order(request, pk):
 
         elif instance.state=="3":
             form=forms.UpdateOrder3(data=request.POST, files=request.FILES, instance=instance)
-            
+
+
+
+        if request.FILES:
+
+            print(request.FILES)
+        else:
+            print("Sem ficheiros")
+
+
+
         if form.is_valid():
             new=form.save(commit=False)
             new.save(update_fields=['state'])
+            print(f"Invoice!!!!!!!!!!!!!!{new.invoice}")
             print(new)
             return HttpResponse("1")
             print(f'pagamento confirmado{form}')
@@ -256,7 +334,11 @@ def update_order(request, pk):
     return render(request,'administrator/update-order.html', {'form':form, 'order':instance})
 
 
-
+def cancel_order(request, pk):
+    order=Order.objects.get(pk=pk)
+    order.state="0"
+    order.save(update_fields=['state',])
+    return redirect('administrator-order', pk=order.pk)
 
 def ajax_delete_shipment(request):
     pk=request.GET.get("pk",None)

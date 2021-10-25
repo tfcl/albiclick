@@ -42,6 +42,8 @@
 <form id="mbway-form" class="form" action="{% url 'checkout-payment'%}" method="post" >
 {% csrf_token %}
 <input class="w-100 form-control " type="hidden" name="shipment" value="">
+<input class="w-100 form-control " type="hidden" name="cupon-code" value="">
+
 <input  type="hidden" name="payment-method" value="mbway">
 
 
@@ -50,13 +52,13 @@
 <input class="w-100 form-control "type="text" name="note" class="">
 </div>
 
-<div   class="padding ">
-    <div class="row">
-        <div class="col-sm-6">
+<div   class="padding my-5 ">
+    <div class="row justify-content-md-center justify-content-lg-start">
+        <div class="col-md-10 col-lg-6 ">
             <div class="card">
                 <div class="card-header">
-                    <strong>MB Way</strong>
-                    <small>Prencha com os seus dados</small>
+                    <p><strong>MB Way</strong>
+                    <small>Prencha com os seus dados</small></p>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -69,7 +71,7 @@
                     </div>
                     
                 </div>
-                <div class="card-footer">
+                <div class="card-footer center-sm">
                     <a  id="mbway-btn" class="btn btn-main ">Finalizar<a>
                         
                 

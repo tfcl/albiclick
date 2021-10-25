@@ -113,17 +113,16 @@
           {% endif%}
       
 
-<div class="view-desktop">
-      <div class="mt-5 ml-4 mb-2 product-info row  ">    
-        <h2 style="" class="active">Descrição</h2>
+<div class="view-desktop" style="overflow: auto;">
+      <div style="width:98%" class="mt-5 ml-1 mb-2 product-info row  ">    
+        <h2 style="" class="active ">Descrição</h2>
         
       </div>
 
-      <div class=" p-4 bg-gray">
 
-
+<div>
         {{product.detail|safe }}
-      </div>
+        </div>
     </div>
 </div>
 
@@ -189,17 +188,15 @@
 
 
   </div>
-<div class="view-mobile">
-      <div class="mt-5 ml-4 mb-2 product-info row  ">    
+<div class="view-mobile "style="overflow: auto;">
+      <div style="width:98%" class="mt-5 ml-1 mb-2 product-info row  ">    
         <h2 style="" class="h1 active">Descrição</h2>
         
       </div>
 
-      <div class=" p-4 bg-gray">
 
 
         {{product.detail|safe }}
-      </div>
     </div>
 </div>
 

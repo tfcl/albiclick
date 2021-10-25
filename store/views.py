@@ -19,7 +19,7 @@ from django.core import serializers
 from django.contrib.postgres.search import TrigramSimilarity
 from albiclick.queries import get_products
 
-
+import copy
 def policies(request):
     return render(request,'policies.html')
 
@@ -275,13 +275,58 @@ def filter_categories(category_intance):
 
 def ajax_load_categories(request):
 
-    categories=Category.objects.filter(depth=0)
-    categories_final=Category.objects.none()
-    categories_del=[]
-   
-    #print(f'Categories from last line of base vieew------------------------------------------------------------------------------------------------{categories_del}')
+    categories=filter(filter_categories,Category.objects.filter(depth=0))
+    
+
+    category_dict={}
+    category_dict2={}
+    category_dict3={}
+
+    categories1=[]
+    categories2=[]
+    categories3=[]
+    categories_final=[]
+
+    for category in categories:
+        category_dict["name"]=category.name
+        category_dict["pk"]=category.pk
+        category_temp=copy.deepcopy(category)
+        categories_temp=Category.objects.filter(parentPk=category_temp)
+        #categories_temp=filter(filter_categories,categories_temp)
+        for category1 in categories_temp:
+            #print(category1)
+            category_dict2["name"]=category1.name
+            category_dict2["pk"]=category1.pk
+            categories_temp1=Category.objects.filter(parentPk=category1)
+            #categories_temp1=filter(filter_categories,categories_temp1)
+            for category2 in categories_temp1:
+                category_dict3["name"]=category2.name
+                category_dict3["pk"]=category2.pk
+                category_dict3["childs"]=False
+                categories3.append(copy.deepcopy(category_dict3))
+            category_dict2['childs']=copy.deepcopy(categories3)
+            categories3.clear()
+            categories2.append(copy.deepcopy(category_dict2))
+            #print(category_dict2)
+
+        category_dict['childs']=copy.deepcopy(categories2)
+        categories2.clear()
+
+        categories1.append(copy.deepcopy(category_dict))
+    #print(categories1)
+
+    # for category in categories1:
+    #     print(f"{category['name']}")
+    #     for child in category['childs']:
+    #         print(f"       {child['name']}")
+    #         for child1 in child['childs']:
+    #             print(f"                  {child1['name']}")
+
+  
+
+
     categories=filter(filter_categories,categories)
-    return render(request,'ajax/categories.html', {'categories':categories})
+    return render(request,'ajax/categories.html', {'categories':categories1})
 
 
 def get_related_categories(category_pk):
